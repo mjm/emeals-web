@@ -8,9 +8,14 @@ script:
 - bundle exec rake
 after_success:
 - ruby bin/travis_after_success
+- ruby bin/autodeliver_stories
 env:
   global:
-    secure: |-
+  - secure: |-
       YN42RDCnKtIFZUQ/CwUbK1t1P2G19pAdJPKc0kJwcYWEQXbKvOSwA0Ek78Bx
       JseGCzq5OmnDyZ7IAQBC2g/oHg4WeDIKVYuhjeO0qyFmq6YmvTW11sg++jjW
       w3ZDQiISaMFISqz7PtTy7Adw6NLKyhAVSwP3mbWNuQ1bVQ4AgrY=
+  - secure: |-
+      TxmEQXxxnPl8IseSI8tHaZzYOmL2Lv6KKRFXd4B06A2PKAJz3Lf85Rb0507F
+      1IvEgMd2lhS6jKlQtRY8gyHM0Z+UQ3rQJc74sn+saGDYJMO6LUxqleHgdeSR
+      R5XPdibrK3SVX+Wf6aVK5UY35Oqigjp/s3f6S7cc8Va7JFfKKBM=

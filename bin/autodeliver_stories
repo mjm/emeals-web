@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'pivotal-tracker'
+
+TRACKER_TOKEN = ENV['TRACKER_TOKEN']
+TRACKER_PROJECT_ID = "862227"
+
+PivotalTracker::Client.token = TRACKER_TOKEN
+PivotalTracker::Client.use_ssl = true
+
+emeals_project = PivotalTracker::Project.find(TRACKER_PROJECT_ID)
+stories = emeals_project.stories.all(:state => "finished", :story_type => ['bug', 'feature'])
+
+#staging_deploy_tag = `git tag | grep staging | tail -n1`
+
+stories.each do | story |
+  puts "Searching for #{story.id} in local git repo."
+  search_result = `git log --grep #{story.id}`
+  if search_result.length > 0
+    puts "Found #{story.id}, marking as delivered."
+    story.notes.create(:text => "Delivered by staging deploy script.")
+    story.update({"current_state" => "delivered"})
+  else
+    puts "Could not find #{story.id} in git repo."
+  end
+end
