@@ -1,5 +1,9 @@
 <h1>Meals</h1>
 
+<% if meals.empty? %>
+  <p>You haven't uploaded any meals!</p>
+<% end %>
+
 <% meals.each do |meal| %>
   <p><%= meal.entree_name %> - <%= meal.side_name %></p>
 <% end %>
