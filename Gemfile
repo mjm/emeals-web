@@ -59,6 +59,7 @@ group :development, :test do
   gem 'rspec-mocks', '~> 2.14.0.rc1'
   gem 'rspec-rails', '~> 2.14.0.rc1'
   gem 'sqlite3'
+  gem 'heroku-headless'
 end
 
 group :production do

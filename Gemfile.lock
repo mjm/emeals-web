@@ -45,6 +45,7 @@ GEM
     diff-lcs (1.2.4)
     emeals (0.0.1)
     erubis (2.7.0)
+    excon (0.25.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
     ffi (1.9.0)
@@ -57,6 +58,11 @@ GEM
       thor (>= 0.14.6)
     guard-rspec (1.2.1)
       guard (>= 1.1)
+    heroku-api (0.3.13)
+      excon (~> 0.25.0)
+    heroku-headless (0.2.1)
+      heroku-api
+      rendezvous
     hike (1.2.3)
     i18n (0.6.4)
     jbuilder (1.4.2)
@@ -118,6 +124,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    rendezvous (0.0.2)
     rspec (2.2.0)
       rspec-core (~> 2.2)
       rspec-expectations (~> 2.2)
@@ -180,6 +187,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   emeals
   guard-rspec
+  heroku-headless
   jbuilder (~> 1.2)
   jquery-rails
   pg
