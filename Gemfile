@@ -44,6 +44,10 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :test do
+  gem 'capybara'
+end
+
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails', '~> 2.13'
