@@ -1,11 +1,18 @@
 class MealsController < ApplicationController
-  def index
+  def index; end
+
+  def upload
+    Meal.create_all_from_menu(uploaded_menu)
+    redirect_to root_url
   end
 
   protected
 
-  helper_method :meals
+  def uploaded_menu
+    params[:menu]
+  end
 
+  helper_method :meals
   def meals
     Meal.order('created_at desc')
   end

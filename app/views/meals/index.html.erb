@@ -7,3 +7,10 @@
 <% meals.each do |meal| %>
   <p><%= meal.entree_name %> - <%= meal.side_name %></p>
 <% end %>
+
+<h2>Upload a Menu</h2>
+
+<%= form_tag upload_meals_url, multipart: true do %>
+  <%= file_field_tag :menu %>
+  <%= submit_tag "Upload" %>
+<% end %>

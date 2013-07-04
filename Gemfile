@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'emeals'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
@@ -44,13 +46,18 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development do
+  gem 'guard-rspec'
+end
+
 group :test do
   gem 'capybara'
 end
 
 group :development, :test do
   gem 'rspec'
-  gem 'rspec-rails', '~> 2.13'
+  gem 'rspec-mocks', '~> 2.14.0.rc1'
+  gem 'rspec-rails', '~> 2.14.0.rc1'
   gem 'sqlite3'
 end
 

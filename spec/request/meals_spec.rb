@@ -14,6 +14,11 @@ feature "Meals list" do
   end
 
   context "when there are no meals to list" do
+    before :each do
+      Meal.delete_all
+      visit "/"
+    end
+
     it "displays a message saying there are no meals" do
       expect(page).to have_content "You haven't uploaded any meals!"
     end
@@ -35,5 +40,35 @@ feature "Meals list" do
     it "displays the name of the side" do
       expect(page).to have_content side_name
     end
+  end
+end
+
+feature "Menu uploads" do
+  let(:upload_button) { "Upload" }
+
+  before :each do
+    visit "/"
+  end
+
+  describe "upload form" do
+    it "has a subheader for menu uploads" do
+      expect(page).to have_selector "h2", text: "Upload a Menu"
+    end
+
+    it "has an upload field in a form" do
+      expect(page).to have_selector "form[enctype='multipart/form-data'] input[type=file]"
+    end
+
+    it "has a button to upload the menu" do
+      expect(page).to have_selector "input[type=submit][value=#{upload_button}]"
+    end
+  end
+
+  it "uploads a menu and displays the saved meals" do
+    attach_file "menu", "spec/fixtures/menu.pdf"
+    click_button upload_button
+
+    expect(page).to have_content "Spicy Sausage and Egg Scramble"
+    expect(page).to have_content "Heirloom Tomato and Spinach Salad"
   end
 end
