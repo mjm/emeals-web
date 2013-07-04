@@ -1,9 +1,28 @@
+---
 language: ruby
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - rbx-19mode
+- 1.9.3
+- 2.0.0
+- rbx-19mode
 script:
-  - sudo apt-get install xpdf
-  - bundle exec rake db:migrate db:test:prepare
-  - bundle exec rake
+- sudo apt-get install xpdf
+- bundle exec rake db:migrate db:test:prepare
+- bundle exec rake
+after_success:
+- wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+- git remote add staging git@heroku.com:emeals-staging.git
+- echo "Host heroku.com" >> ~/.ssh/config
+- echo "   StrictHostKeyChecking no" >> ~/.ssh/config
+- echo "   CheckHostIP no" >> ~/.ssh/config
+- echo "   UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+- heroku keys:clear
+- yes | heroku keys:add
+- yes | git push staging master
+- git tag staging
+- git push --tags
+env:
+  global:
+    secure: |-
+      YN42RDCnKtIFZUQ/CwUbK1t1P2G19pAdJPKc0kJwcYWEQXbKvOSwA0Ek78Bx
+      JseGCzq5OmnDyZ7IAQBC2g/oHg4WeDIKVYuhjeO0qyFmq6YmvTW11sg++jjW
+      w3ZDQiISaMFISqz7PtTy7Adw6NLKyhAVSwP3mbWNuQ1bVQ4AgrY=
