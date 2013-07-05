@@ -11,13 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130703030434) do
+ActiveRecord::Schema.define(version: 20130705213612) do
 
   create_table "meals", force: true do |t|
     t.string   "entree_name"
     t.string   "side_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "prep_time"
+    t.string   "cook_time"
+    t.string   "total_time"
+    t.string   "flags",       default: [], array: true
   end
 
 end

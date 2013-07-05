@@ -10,3 +10,33 @@
     @include button($padding:$button-sml);
   }
 }
+
+#meal_header {
+  @include grid-row;
+  div {
+    @include grid-column(10, false, false, 1);
+  }
+}
+
+#meal_content {
+  @include grid-row;
+  aside {
+    @include grid-column(3, false, false, 1);
+  }
+}
+
+.meal_times {
+  @include pricing-table-container;
+  .prep_time, .cook_time {
+    @include pricing-table-bullet;
+  }
+  .total_time {
+    @include pricing-table-title;
+  }
+}
+
+.meal_flag {
+  @include alert;
+  text-align: center;
+  text-transform: capitalize;
+}

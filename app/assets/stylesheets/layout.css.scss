@@ -1,8 +1,8 @@
-header, article {
+body > header {
   @include grid-row;
 }
 
-header {
+body > header {
   h1 {
     @include grid-column(12);
     small {

@@ -39,11 +39,11 @@ feature "Meals list" do
     end
 
     it "displays the name of the entree" do
-      expect(page).to have_content entree_name
+      expect(page).to have_selector "a", text: entree_name
     end
 
     it "displays the name of the side" do
-      expect(page).to have_content side_name
+      expect(page).to have_selector "a", text: side_name
     end
   end
 end
@@ -76,4 +76,33 @@ feature "Menu uploads" do
     expect(page).to have_content "Spicy Sausage and Egg Scramble"
     expect(page).to have_content "Heirloom Tomato and Spinach Salad"
   end
+end
+
+feature "Meal show" do
+  fixtures :meals
+
+  let(:entree_name) { "Delicious Entree" }
+  let(:side_name)   { "Delicious Side" }
+
+  before :each do
+    visit "/"
+    click_link entree_name
+  end
+
+  it "shows the entree name" do
+    expect(page).to have_content entree_name
+  end
+
+  it "shows the side name" do
+    expect(page).to have_content side_name
+  end
+
+  it "shows the meal times" do
+    %w(10m 15m 25m).each {|time| expect(page).to have_content time }
+  end
+
+  it "shows any flags on the meal" do
+    expect(page).to have_content "Slow cooker"
+  end
+
 end

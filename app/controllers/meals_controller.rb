@@ -1,6 +1,8 @@
 class MealsController < ApplicationController
   def index; end
 
+  def show; end
+
   def upload
     Meal.create_all_from_menu(uploaded_menu)
     redirect_to root_url
@@ -10,6 +12,11 @@ class MealsController < ApplicationController
 
   def uploaded_menu
     params[:menu]
+  end
+
+  helper_method :meal
+  def meal
+    Meal.find(params[:id])
   end
 
   helper_method :meals

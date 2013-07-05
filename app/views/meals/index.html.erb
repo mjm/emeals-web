@@ -1,31 +1,35 @@
-<section id="meals">
-  <h2>Your Saved Meals</h2>
+<div class="row">
+  <section id="meals">
+    <h2>Your Saved Meals</h2>
 
-  <% if meals.empty? %>
-    <p>You haven't uploaded any meals!</p>
-  <% else %>
-    <table>
-      <thead>
-      <th>Entree</th>
-      <th>Side Dish</th>
-      </thead>
-      <tbody>
-      <% meals.each do |meal| %>
-        <tr>
-          <td><%= meal.entree_name %></td>
-          <td><%= meal.side_name %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  <% end %>
-</section>
+    <% if meals.empty? %>
+      <p>You haven't uploaded any meals!</p>
+    <% else %>
+      <table>
+        <thead>
+        <th>Entree</th>
+        <th>Side Dish</th>
+        </thead>
+        <tbody>
+        <% meals.each do |meal| %>
+          <tr>
+            <td><%= link_to meal.entree_name, meal_url(meal) %></td>
+            <td><%= link_to meal.side_name, meal_url(meal) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </section>
+</div>
 
-<section id="upload_form">
-  <h3>Upload a Menu</h3>
+<div class="row">
+  <section id="upload_form">
+    <h3>Upload a Menu</h3>
 
-  <%= form_tag upload_meals_url, multipart: true do %>
-    <%= file_field_tag :menu %>
-    <%= submit_tag "Upload" %>
-  <% end %>
-</section>
+    <%= form_tag upload_meals_url, multipart: true do %>
+      <%= file_field_tag :menu %>
+      <%= submit_tag "Upload" %>
+    <% end %>
+  </section>
+</div>
