@@ -5,12 +5,13 @@ feature "Meals list" do
     visit "/"
   end
 
-  it "shows Meal Sorter in the title" do
+  it "shows Meal Sorter in the title and header" do
     expect(page.title).to eq "Meal Sorter"
+    expect(page).to have_selector "h1", text: "Meal Sorter"
   end
 
   it "has a header" do
-    expect(page).to have_selector "h1", text: "Meals"
+    expect(page).to have_selector "h2", text: "Your Saved Meals"
   end
 
   context "when there are no meals to list" do
@@ -52,7 +53,7 @@ feature "Menu uploads" do
 
   describe "upload form" do
     it "has a subheader for menu uploads" do
-      expect(page).to have_selector "h2", text: "Upload a Menu"
+      expect(page).to have_selector "h3", text: "Upload a Menu"
     end
 
     it "has an upload field in a form" do
