@@ -10,6 +10,10 @@ feature "Meals list" do
     expect(page).to have_selector "h1", text: "Meal Sorter"
   end
 
+  it "shows a slogan in the header" do
+    expect(page).to have_selector "h1 small", text: "A better way to use eMeals"
+  end
+
   it "has a header" do
     expect(page).to have_selector "h2", text: "Your Saved Meals"
   end

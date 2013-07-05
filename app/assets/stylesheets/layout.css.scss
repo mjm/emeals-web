@@ -3,9 +3,10 @@ header, article {
 }
 
 header {
-  border-bottom: 1px solid #ddd;
-
   h1 {
     @include grid-column(12);
+    small {
+      font-weight: 300;
+    }
   }
 }
