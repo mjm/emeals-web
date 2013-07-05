@@ -2,10 +2,12 @@
 language: ruby
 rvm:
 - 2.0.0
-script:
+before_script:
 - sudo apt-get install xpdf
-- bundle exec rake db:migrate db:test:prepare
-- bundle exec rake
+- psql -c 'create database emeals_test;' -U postgres
+- bin/rake db:setup db:test:prepare
+script:
+- bin/rake
 after_success:
 - ruby bin/travis_after_success
 - ruby bin/autodeliver_stories

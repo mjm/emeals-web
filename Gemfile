@@ -29,6 +29,8 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem 'pg'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -58,13 +60,11 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-mocks', '~> 2.14.0.rc1'
   gem 'rspec-rails', '~> 2.14.0.rc1'
-  gem 'sqlite3'
   gem 'heroku-headless'
   gem 'pivotal-tracker'
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 
