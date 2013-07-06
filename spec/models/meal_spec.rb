@@ -40,4 +40,9 @@ describe Meal do
       end
     end
   end
+
+  describe "validations" do
+    it { should validate_presence_of :entree_name }
+    it { should validate_presence_of :side_name }
+  end
 end
