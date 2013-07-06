@@ -1,4 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'heroku-headless'
+
+HerokuHeadless.configure do |config|
+  config.post_deploy_commands = ['rake db:migrate']
+  config.restart_processes = true
+end
+
 HerokuHeadless::Deployer.deploy( 'emeals-staging' )
