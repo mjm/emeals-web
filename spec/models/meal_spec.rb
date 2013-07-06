@@ -40,6 +40,7 @@ describe Meal do
       end
     end
 
+    # This is uncomfortably complicated for an example
     it "replaces identically-named meals" do
       Meal.create_all_from_menu("some_menu.pdf")
       meal = double("meal")
