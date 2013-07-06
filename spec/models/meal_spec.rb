@@ -12,5 +12,32 @@ describe Meal do
       expect(Meal).to receive(:create).twice
       Meal.create_all_from_menu("some_menu.pdf")
     end
+
+    describe "each created meal" do
+      before :each do
+        allow(Meal).to receive(:create) do |params|
+          @params = params
+        end
+        Meal.create_all_from_menu("some_menu.pdf")
+      end
+
+      it "has an entree name" do
+        expect(@params).to have_key :entree_name
+      end
+
+      it "has a side name" do
+        expect(@params).to have_key :side_name
+      end
+
+      it "has times" do
+        %w(prep cook total).each do |time|
+          expect(@params).to have_key "#{time}_time".to_sym
+        end
+      end
+
+      it "has flags" do
+        expect(@params).to have_key :flags
+      end
+    end
   end
 end
