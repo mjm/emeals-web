@@ -30,20 +30,18 @@ feature "Meals list" do
   end
 
   context "when there are some meals to list" do
-    let(:entree_name) { "Delicious Entree" }
-    let(:side_name)   { "Delicious Side" }
+    fixtures :meals, :dishes
 
     before :each do
-      Meal.create(entree_name: entree_name, side_name: side_name)
       visit "/"
     end
 
     it "displays the name of the entree" do
-      expect(page).to have_selector "a", text: entree_name
+      expect(page).to have_selector "a", text: "Delicious Entree"
     end
 
     it "displays the name of the side" do
-      expect(page).to have_selector "a", text: side_name
+      expect(page).to have_selector "a", text: "Delicious Side"
     end
   end
 end
@@ -79,7 +77,7 @@ feature "Menu uploads" do
 end
 
 feature "Meal show" do
-  fixtures :meals
+  fixtures :meals, :dishes
 
   let(:entree_name) { "Delicious Entree" }
   let(:side_name)   { "Delicious Side" }

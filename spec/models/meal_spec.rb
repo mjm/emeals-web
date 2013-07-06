@@ -21,12 +21,12 @@ describe Meal do
         Meal.create_all_from_menu("some_menu.pdf")
       end
 
-      it "has an entree name" do
-        expect(@params).to have_key :entree_name
+      it "has an entree" do
+        expect(@params).to have_key :entree
       end
 
-      it "has a side name" do
-        expect(@params).to have_key :side_name
+      it "has a side" do
+        expect(@params).to have_key :side
       end
 
       it "has times" do
@@ -42,6 +42,7 @@ describe Meal do
 
     # This is uncomfortably complicated for an example
     it "replaces identically-named meals" do
+      pending "Reconsider how this should work"
       Meal.create_all_from_menu("some_menu.pdf")
       meal = double("meal")
       expect(Meal).to receive(:find_by).twice { meal }
@@ -52,7 +53,12 @@ describe Meal do
   end
 
   describe "validations" do
-    it { should validate_presence_of :entree_name }
-    it { should validate_presence_of :side_name }
+    it { should validate_presence_of :entree }
+    it { should validate_presence_of :side }
+  end
+
+  describe "associations" do
+    it { should belong_to :entree }
+    it { should belong_to :side }
   end
 end
