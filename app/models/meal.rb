@@ -2,8 +2,10 @@ class Meal < ActiveRecord::Base
   validates :entree_name, :side_name, presence: true
 
   def self.create_all_from_menu(menu)
-    menu = Emenus::Client.new.parse(menu)
+    menu = Emeals::Client::new.parse(menu)
     menu.meals.each do |meal|
+      existing_meal = Meal.find_by(entree_name: meal.entree.name, side_name: meal.side.name)
+      existing_meal.destroy if existing_meal
       Meal.create(entree_name: meal.entree.name,
                   side_name:   meal.side.name,
                   prep_time:   meal.times[:prep],

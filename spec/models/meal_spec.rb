@@ -39,6 +39,15 @@ describe Meal do
         expect(@params).to have_key :flags
       end
     end
+
+    it "replaces identically-named meals" do
+      Meal.create_all_from_menu("some_menu.pdf")
+      meal = double("meal")
+      expect(Meal).to receive(:find_by).twice { meal }
+      expect(meal).to receive(:destroy).twice
+      expect(Meal).to receive(:create).twice
+      Meal.create_all_from_menu("some_menu.pdf")
+    end
   end
 
   describe "validations" do
