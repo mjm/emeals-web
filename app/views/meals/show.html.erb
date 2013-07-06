@@ -1,0 +1,21 @@
+<header id="meal_header">
+  <div>
+    <h2><%= meal.entree_name %> <small><%= meal.side_name %></small></h2>
+  </div>
+</header>
+
+<section id="meal_content">
+  <aside>
+    <% unless meal.flags.empty? %>
+      <div class="meal_flag">
+        <%= show_flags meal %>
+      </div>
+    <% end %>
+
+    <ul class="meal_times">
+      <li class="total_time">Total Time: <%= meal.total_time %></li>
+      <li class="prep_time">Prep Time: <%= meal.prep_time %></li>
+      <li class="cook_time">Cook Time: <%= meal.cook_time %></li>
+    </ul>
+  </aside>
+</section>
