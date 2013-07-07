@@ -1,0 +1,18 @@
+<section class="hrecipe">
+  <p class="fn" data-section-title>
+    <a href="#<%= type %>"><%= dish.name %></a>
+  </p>
+  <div class="recipe-content" data-slug="<%= type %>" data-section-content>
+    <h4>Ingredients</h4>
+    <ul>
+      <% dish.ingredients.each do |i| %>
+        <li class="ingredient">
+          <span class="value"><%= i.amount %></span>
+          <% unless i.unit.blank? %><span class="type"><%= i.unit %></span><% end %>
+          <%= i.description %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>
+

@@ -60,6 +60,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.14.0.rc1'
   gem 'heroku-headless'
   gem 'pivotal-tracker'
+  gem 'launchy'
 end
 
 group :production do

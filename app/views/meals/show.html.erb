@@ -19,4 +19,11 @@
       <li class="cook_time">Cook Time: <%= meal.cook_time %></li>
     </ul>
   </aside>
+
+  <article>
+    <div class="recipe-container" data-section="tabs">
+      <%= render partial: 'dish', locals: {dish: meal.entree, type: 'entree'} %>
+      <%= render partial: 'dish', locals: {dish: meal.side, type: 'side'} %>
+    </div>
+  </article>
 </section>

@@ -23,6 +23,9 @@
   aside {
     @include grid-column(3, false, false, 1);
   }
+  article {
+    @include grid-column(7, true);
+  }
 }
 
 .meal_times {
@@ -39,4 +42,22 @@
   @include alert;
   text-align: center;
   text-transform: capitalize;
+}
+
+.recipe-container {
+  @include section-container($section-type:accordion);
+  & > section {
+    @include section($section-type:accordion, $title-selector:".fn", $content-selector:".recipe-content");
+  }
+
+  @media #{$small} {
+    @include section-container(false, $section-type:tabs);
+    & > section {
+      @include section($section-type:tabs, $title-selector:".fn", $content-selector:".recipe-content");
+    }
+  }
+
+  ul, ol {
+    margin-left: emCalc(20px);
+  }
 }

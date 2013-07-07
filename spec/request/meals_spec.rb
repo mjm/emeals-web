@@ -77,7 +77,7 @@ feature "Menu uploads" do
 end
 
 feature "Meal show" do
-  fixtures :meals, :dishes
+  fixtures :meals, :dishes, :ingredients
 
   let(:entree_name) { "Delicious Entree" }
   let(:side_name)   { "Delicious Side" }
@@ -101,6 +101,14 @@ feature "Meal show" do
 
   it "shows any flags on the meal" do
     expect(page).to have_content "Slow cooker"
+  end
+
+  it "shows the ingredients of the meal" do
+    within("ul .ingredient:first-child") do
+      expect(page).to have_selector ".value", text: "3/2"
+      expect(page).to have_selector ".type", text: "lb"
+      expect(page).to have_content "beef stew meat"
+    end
   end
 
 end

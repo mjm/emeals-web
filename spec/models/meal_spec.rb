@@ -15,28 +15,40 @@ describe Meal do
 
     describe "each created meal" do
       before :each do
-        allow(Meal).to receive(:create) do |params|
-          @params = params
-        end
+        [Meal, Dish, Ingredient].each {|klass| klass.destroy_all}
         Meal.create_all_from_menu("some_menu.pdf")
+        @meal = Meal.first
       end
 
       it "has an entree" do
-        expect(@params).to have_key :entree
+        expect(@meal.entree.name).to eq "Spicy Sausage Scramble"
       end
 
       it "has a side" do
-        expect(@params).to have_key :side
+        expect(@meal.side.name).to eq "Zucchini Casserole"
       end
 
       it "has times" do
         %w(prep cook total).each do |time|
-          expect(@params).to have_key "#{time}_time".to_sym
+          expect(@meal.send("#{time}_time")).to be
         end
       end
 
       it "has flags" do
-        expect(@params).to have_key :flags
+        expect(@meal.flags).to be
+      end
+
+      describe "ingredients" do
+        it "has the correct number of ingredients" do
+          expect(@meal.entree.ingredients.size).to eq 3
+        end
+
+        it "has the correct ingredient data" do
+          ingredient = @meal.entree.ingredients.first
+          expect(ingredient.amount).to eq "1"
+          expect(ingredient.unit).to eq "tablespoon"
+          expect(ingredient.description).to eq "ingredient 1"
+        end
       end
     end
 
