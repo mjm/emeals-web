@@ -58,6 +58,10 @@
   }
 
   ul, ol {
-    margin-left: emCalc(20px);
+    margin-left: emCalc(25px);
+  }
+
+  .instructions li:after {
+    content: '.';
   }
 }

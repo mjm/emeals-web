@@ -21,7 +21,8 @@ class Meal < ActiveRecord::Base
   private
 
   def self.create_dish(dish)
-    Dish.create(name: dish.name).tap do |d|
+    Dish.create(name:        dish.name,
+               instructions: dish.instructions.join("\n")).tap do |d|
       dish.ingredients.each do |i|
         d.ingredients.create(amount:      i.quantity.amount.to_s.sub("/1", ''),
                              unit:        i.quantity.unit.to_s,

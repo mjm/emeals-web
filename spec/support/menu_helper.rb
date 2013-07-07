@@ -21,6 +21,7 @@ def make_dish(name)
       dish.ingredients << Emeals::Ingredient.new("#{i+1}",
                                                  :tablespoon,
                                                  "ingredient #{i+1}")
+      dish.instructions << "Do thing ##{i+1}"
     end
   end
 end

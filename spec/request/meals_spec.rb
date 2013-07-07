@@ -111,4 +111,8 @@ feature "Meal show" do
     end
   end
 
+  it "shows the instructions of the meal" do
+    expect(page).to have_selector "ol.instructions li:first-child", text: "Sprinkle beef evenly with salt and pepper"
+  end
+
 end

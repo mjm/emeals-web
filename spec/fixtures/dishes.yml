@@ -1,5 +1,9 @@
 delicious_entree:
   name: Delicious Entree
+  instructions: |
+    Sprinkle beef evenly with salt and pepper.
+    Place in a 3- or 4-quart slow cooker.
+    Pour tomatoes and broth over beef.
 delicious_side:
   name: Delicious Side
 

@@ -50,6 +50,16 @@ describe Meal do
           expect(ingredient.description).to eq "ingredient 1"
         end
       end
+
+      describe "instructions" do
+        it "has the correct number of instructions" do
+          expect(@meal.entree.instructions.split("\n").size).to eq 3
+        end
+
+        it "has the correct instructions" do
+          expect(@meal.entree.instructions).to eq "Do thing #1\nDo thing #2\nDo thing #3"
+        end
+      end
     end
 
     # This is uncomfortably complicated for an example
