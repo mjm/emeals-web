@@ -190,6 +190,8 @@ feature "Meal edit" do
 end
 
 feature "Meal delete" do
+  fixtures :meals, :dishes
+
   before :each do
     visit "/"
     click_button "Delete"

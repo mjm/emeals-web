@@ -6,4 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Meal.create_all_from_menu(File.join(File.dirname(__FILE__), '..', 'spec', 'fixtures', 'menu.pdf'))
+ImportMenuService.new.import(File.join(File.dirname(__FILE__), '..', 'spec', 'fixtures', 'menu.pdf'))
