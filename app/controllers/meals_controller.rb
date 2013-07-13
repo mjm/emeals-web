@@ -18,7 +18,7 @@ class MealsController < ApplicationController
   end
 
   def upload
-    Meal.create_all_from_menu(uploaded_menu)
+    ImportMenuService.new.import(uploaded_menu)
     redirect_to root_url
   end
 

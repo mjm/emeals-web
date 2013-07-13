@@ -2,18 +2,20 @@ class ImportMenuService
   def import(menu)
     menu = Emeals::Client.new.parse(menu)
     menu.meals.each do |meal|
-      entree = create_dish(meal.entree)
-      side   = create_dish(meal.side)
-      Meal.create(entree:      entree,
-                  side:        side,
-                  prep_time:   meal.times[:prep],
-                  cook_time:   meal.times[:cook],
-                  total_time:  meal.times[:total],
-                  flags:       meal.flags.map(&:to_s))
+      create_meal(meal)
     end
   end
 
   private
+
+  def create_meal(meal)
+    Meal.create(entree:      create_dish(meal.entree),
+                side:        create_dish(meal.side),
+                prep_time:   meal.times[:prep],
+                cook_time:   meal.times[:cook],
+                total_time:  meal.times[:total],
+                flags:       meal.flags.map(&:to_s))
+  end
 
   def create_dish(dish)
     Dish.create(name:         dish.name,
