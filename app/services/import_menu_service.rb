@@ -1,6 +1,6 @@
 class ImportMenuService
   def import(menu)
-    menu = Emeals::Client::new.parse(menu)
+    menu = Emeals::Client.new.parse(menu)
     menu.meals.each do |meal|
       entree = create_dish(meal.entree)
       side   = create_dish(meal.side)
@@ -25,5 +25,4 @@ class ImportMenuService
       end
     end
   end
-  
 end

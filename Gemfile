@@ -4,6 +4,7 @@ gem 'emeals'
 gem 'pg'
 gem 'zurb-foundation'
 gem 'shoulda-matchers'
+gem 'virtus'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'

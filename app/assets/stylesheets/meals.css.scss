@@ -1,5 +1,12 @@
 #meals {
   @include grid-column(8, true, true);
+  form {
+    margin-bottom: 0;
+    input[type=submit] {
+      @include button($padding:$button-sml);
+      margin-bottom: 0;
+    }
+  }
 }
 
 #upload_form {
@@ -63,5 +70,29 @@
 
   .instructions li:after {
     content: '.';
+  }
+}
+
+#edit_meal_header {
+  @include grid-row;
+  div {
+    @include grid-column(10, false, true, 1);
+  }
+}
+
+#edit_meal {
+  @include grid-row;
+  form {
+    @include grid-column(10, false, true, 1);
+
+    input[type=submit] {
+      @include button;
+    }
+    .dish_name_field {
+      @include grid-column(12, true);
+    }
+    .side_fields {
+      @include grid-column(4);
+    }
   }
 }

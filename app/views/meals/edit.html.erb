@@ -1,0 +1,38 @@
+<header id="meal_header">
+  <div>
+    <h2>Edit this Meal</h2>
+  </div>
+</header>
+
+<article id="edit_meal">
+  <%= form_for meal_form, url: meal_url(meal_form.meal), method: :put, as: :meal do |f| %>
+    <div class="row">
+      <div class="dish_name_field">
+        <%= f.label :entree_name, "Entree Name" %>
+        <%= f.text_field :entree_name %>
+        <%= f.label :side_name, "Side Name" %>
+        <%= f.text_field :side_name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="side_fields">
+        <fieldset>
+          <legend>Flags</legend>
+          <% meal_flags.each do |desc, name| %>
+            <%= flag_field desc, name %>
+          <% end %>
+        </fieldset>
+        <fieldset>
+          <legend>Times</legend>
+          <%= f.label :prep_time, "Prep Time" %>
+          <%= f.text_field :prep_time %>
+          <%= f.label :cook_time, "Cook Time" %>
+          <%= f.text_field :cook_time %>
+          <%= f.label :total_time, "Total Time" %>
+          <%= f.text_field :total_time %>
+        </fieldset>
+      </div>
+    </div>
+    <%= f.submit "Save Meal Changes" %>
+  <% end %>
+</article>

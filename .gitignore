@@ -17,3 +17,6 @@
 
 # Ignore RubyMine project files.
 /.idea
+
+# Ignore CTags file
+/tags

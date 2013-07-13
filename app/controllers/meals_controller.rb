@@ -3,6 +3,15 @@ class MealsController < ApplicationController
 
   def show; end
 
+  def edit; end
+
+  def update
+    meal_form.attributes = meal_params.to_hash
+    meal_form.save
+
+    redirect_to root_url
+  end
+
   def upload
     Meal.create_all_from_menu(uploaded_menu)
     redirect_to root_url
@@ -14,9 +23,18 @@ class MealsController < ApplicationController
     params[:menu]
   end
 
+  def meal_params
+    params.require(:meal).permit(:entree_name, :side_name, flags: [])
+  end
+
   helper_method :meal
   def meal
     Meal.find(params[:id])
+  end
+
+  helper_method :meal_form
+  def meal_form
+    @meal_form ||= MealForm.new(meal)
   end
 
   helper_method :meals

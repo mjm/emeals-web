@@ -43,6 +43,10 @@ feature "Meals list" do
     it "displays the name of the side" do
       expect(page).to have_selector "a", text: "Delicious Side"
     end
+
+    it "displays an edit button" do
+      expect(page).to have_selector "input[type=submit][value=Edit]"
+    end
   end
 end
 
@@ -114,5 +118,68 @@ feature "Meal show" do
   it "shows the instructions of the meal" do
     expect(page).to have_selector "ol.instructions li:first-child", text: "Sprinkle beef evenly with salt and pepper"
   end
+end
 
+feature "Meal edit" do
+  fixtures :meals, :dishes, :ingredients
+
+  let(:meal) { meals(:delicious) }
+
+  before :each do
+    visit "/"
+    click_button "Edit"
+  end
+
+  it "shows an 'Edit this Meal' header" do
+    expect(page).to have_content "Edit this Meal"
+  end
+
+  it "populates fields for dish names" do
+    expect(page).to have_field "Entree Name", with: "Delicious Entree"
+    expect(page).to have_field "Side Name", with: "Delicious Side"
+  end
+
+  it "populates fields for flags" do
+    expect(page).to have_checked_field "Slow Cooker"
+    expect(page).to have_unchecked_field "On the Grill"
+  end
+
+  it "populates fields for times" do
+    expect(page).to have_field "Prep Time", with: "10m"
+    expect(page).to have_field "Cook Time", with: "15m"
+    expect(page).to have_field "Total Time", with: "25m"
+  end
+
+  context "when the form is submitted" do
+    before :each do
+      fill_in "Entree Name", with: "Better Entree"
+      fill_in "Side Name", with: "Better Side"
+      check "Marinate Ahead"
+      uncheck "Slow Cooker"
+      fill_in "Prep Time", with: "45m"
+      fill_in "Total Time", with: "60m"
+
+      click_button "Save Meal Changes"
+    end
+
+    it "saves the entree name" do
+      expect(page).to have_content "Better Entree"
+    end
+
+    it "saves the side name" do
+      expect(page).to have_content "Better Side"
+    end
+
+    it "saves the flag changes" do
+      click_link "Better Entree"
+      expect(page).to have_content "Marinate ahead"
+      expect(page).to_not have_content "Slow cooker"
+    end
+
+    it "saves the time changes" do
+      click_link "Better Entree"
+      expect(page).to have_selector ".prep_time", "45m"
+      expect(page).to have_selector ".total_time", "60m"
+    end
+  end
 end
