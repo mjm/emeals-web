@@ -9,14 +9,19 @@
         <thead>
         <th>Entree</th>
         <th>Side Dish</th>
-        <th>Options</th>
+        <th class="options">Options</th>
         </thead>
         <tbody>
         <% meals.each do |meal| %>
           <tr>
             <td><%= link_to meal.entree.name, meal_url(meal) %></td>
             <td><%= link_to meal.side.name, meal_url(meal) %></td>
-            <td><%= button_to "Edit", edit_meal_url(meal), method: 'get' %></td>
+            <td class="options">
+              <ul class="button-group">
+                <li><%= button_to "Edit", edit_meal_url(meal), method: 'get' %></li>
+                <li><%= button_to "Delete", meal_url(meal), method: 'delete' %></li>
+              </ul>
+            </td>
           </tr>
         <% end %>
         </tbody>

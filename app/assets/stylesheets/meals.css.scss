@@ -1,7 +1,17 @@
 #meals {
-  @include grid-column(8, true, true);
+  @include grid-column(10, true, true);
+  .options {
+    width: emCalc(140px);
+  }
+  table {
+    width: 100%;
+  }
   form {
-    margin-bottom: 0;
+    margin: 0;
+    padding: 0;
+    &, div {
+      display: inline-block;
+    }
     input[type=submit] {
       @include button($padding:$button-sml);
       margin-bottom: 0;
@@ -11,7 +21,7 @@
 
 #upload_form {
   @include panel;
-  @include grid-column(8, true, true);
+  @include grid-column(10, true, true);
 
   input[type=submit] {
     @include button($padding:$button-sml);

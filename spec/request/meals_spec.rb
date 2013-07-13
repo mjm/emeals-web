@@ -47,6 +47,10 @@ feature "Meals list" do
     it "displays an edit button" do
       expect(page).to have_button "Edit"
     end
+
+    it "displays a delete button" do
+      expect(page).to have_button "Delete"
+    end
   end
 end
 
@@ -182,5 +186,16 @@ feature "Meal edit" do
       expect(page).to have_selector ".prep_time", "45m"
       expect(page).to have_selector ".total_time", "60m"
     end
+  end
+end
+
+feature "Meal delete" do
+  before :each do
+    visit "/"
+    click_button "Delete"
+  end
+
+  it "deletes the meal from the system" do
+    expect(page).to_not have_content "Delicious Entree"
   end
 end

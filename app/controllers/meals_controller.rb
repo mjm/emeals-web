@@ -12,6 +12,11 @@ class MealsController < ApplicationController
     redirect_to root_url
   end
 
+  def destroy
+    meal.destroy
+    redirect_to root_url
+  end
+
   def upload
     Meal.create_all_from_menu(uploaded_menu)
     redirect_to root_url
