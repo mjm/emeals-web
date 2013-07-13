@@ -37,15 +37,15 @@ feature "Meals list" do
     end
 
     it "displays the name of the entree" do
-      expect(page).to have_selector "a", text: "Delicious Entree"
+      expect(page).to have_link "Delicious Entree"
     end
 
     it "displays the name of the side" do
-      expect(page).to have_selector "a", text: "Delicious Side"
+      expect(page).to have_link "Delicious Side"
     end
 
     it "displays an edit button" do
-      expect(page).to have_selector "input[type=submit][value=Edit]"
+      expect(page).to have_button "Edit"
     end
   end
 end
@@ -63,11 +63,12 @@ feature "Menu uploads" do
     end
 
     it "has an upload field in a form" do
-      expect(page).to have_selector "form[enctype='multipart/form-data'] input[type=file]"
+      expect(page).to have_selector "form[enctype='multipart/form-data']"
+      expect(page).to have_field "menu", type: "file"
     end
 
     it "has a button to upload the menu" do
-      expect(page).to have_selector "input[type=submit][value=#{upload_button}]"
+      expect(page).to have_button upload_button
     end
   end
 
