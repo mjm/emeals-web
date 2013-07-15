@@ -50,6 +50,7 @@ GEM
     columnize (0.3.6)
     crack (0.4.0)
       safe_yaml (~> 0.9.0)
+    database_cleaner (1.0.1)
     debugger (1.6.0)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -225,6 +226,7 @@ DEPENDENCIES
   capybara
   capybara-webkit
   coffee-rails (~> 4.0.0)
+  database_cleaner
   debugger
   emeals
   guard-rspec
