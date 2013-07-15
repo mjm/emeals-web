@@ -49,6 +49,6 @@ class MealsController < ApplicationController
 
   helper_method :meals
   def meals
-    Meal.order('created_at desc')
+    Meal.order('created_at desc').includes(:entree, :side)
   end
 end
