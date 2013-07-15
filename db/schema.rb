@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130706220222) do
+ActiveRecord::Schema.define(version: 20130713234009) do
 
   create_table "dishes", force: true do |t|
     t.string   "name"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20130706220222) do
     t.string   "flags",      default: [], array: true
     t.integer  "entree_id"
     t.integer  "side_id"
+    t.integer  "rating",     default: 0
   end
 
 end

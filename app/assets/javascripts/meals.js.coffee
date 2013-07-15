@@ -1,6 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
 $(document).on 'page:load', ->
-  $(this).foundation('section', 'reflow');
+  $(this).foundation('section', 'reflow')
+  $('.rateit').rateit()
+
+$(document).on "click", ".rateit", ->
+  $($(this).data('rateit-backingfld')).closest('form').submit()
+
+$(document).on "ajax:success", ".rate_meal", ->
+  $(this).find('.message').text("Rating saved!")

@@ -123,6 +123,21 @@ feature "Meal show" do
   it "shows the instructions of the meal" do
     expect(page).to have_selector "ol.instructions li:first-child", text: "Sprinkle beef evenly with salt and pepper"
   end
+
+  describe "ratings" do
+    it "has a rating field" do
+      expect(page).to have_field "Rating", type: "range", with: "2"
+    end
+
+    it "lets the user update the rating", js: true do
+      fill_in "Rating", with: "3", visible: false
+      page.execute_script "$('.rateit').click()"
+      expect(page).to have_content "Rating saved"
+
+      visit "/meals/#{meals(:delicious).id}"
+      expect(page).to have_field "Rating", with: "3", visible: false
+    end
+  end
 end
 
 feature "Meal edit" do

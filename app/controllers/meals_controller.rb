@@ -22,6 +22,11 @@ class MealsController < ApplicationController
     redirect_to root_url
   end
 
+  def rate
+    meal.update rating: params[:rating]
+    render nothing: true
+  end
+
   protected
 
   def uploaded_menu

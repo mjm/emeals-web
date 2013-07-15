@@ -6,6 +6,7 @@ EmealsWeb::Application.routes.draw do
   root 'meals#index'
   resources :meals do
     post 'upload', on: :collection
+    patch 'rate', on: :member
   end
 
   # Example of regular route:

@@ -7,6 +7,13 @@
 
 <section id="meal_content">
   <aside>
+    <%= form_tag rate_meal_url(meal), method: :patch, remote: true, class: 'rate_meal' do %>
+      <div class="message"></div>
+      <label for="meal_rating" class="inline column large-3">Rating</label>
+      <input type="range" name="rating" step="1" min="0" max="5" value="<%= meal.rating %>" id="meal_rating">
+      <div class="rateit" data-rateit-backingfld="#meal_rating"></div>
+    <% end %>
+
     <% unless meal.flags.empty? %>
       <div class="meal_flag">
         <%= show_flags meal %>

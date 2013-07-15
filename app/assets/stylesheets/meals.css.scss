@@ -39,6 +39,9 @@
   @include grid-row;
   aside {
     @include grid-column(3, false, false, 1);
+    .rateit {
+      padding-top: 0.5em;
+    }
   }
   article {
     @include grid-column(7, true);

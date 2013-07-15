@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.rateit.min
 //= require foundation
 //= require turbolinks
 //= require_tree .

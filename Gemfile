@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'emeals'
 gem 'pg'
 gem 'zurb-foundation'
-gem 'shoulda-matchers'
 gem 'virtus'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -62,6 +61,8 @@ group :development, :test do
   gem 'heroku-headless'
   gem 'pivotal-tracker'
   gem 'launchy'
+  gem 'capybara-webkit'
+  gem 'shoulda-matchers'
 end
 
 group :production do
