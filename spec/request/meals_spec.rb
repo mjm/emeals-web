@@ -163,6 +163,10 @@ feature "Meal edit" do
     expect(page).to have_field "Side Name", with: "Delicious Side"
   end
 
+  it "populates a field for the rating" do
+    expect(page).to have_field "Rating", with: "2"
+  end
+
   it "populates fields for flags" do
     expect(page).to have_checked_field "Slow Cooker"
     expect(page).to have_unchecked_field "On the Grill"
@@ -180,6 +184,7 @@ feature "Meal edit" do
       fill_in "Side Name", with: "Better Side"
       check "Marinate Ahead"
       uncheck "Slow Cooker"
+      fill_in "Rating", with: "4"
       fill_in "Prep Time", with: "45m"
       fill_in "Total Time", with: "60m"
 
@@ -192,6 +197,10 @@ feature "Meal edit" do
 
     it "saves the side name" do
       expect(page).to have_content "Better Side"
+    end
+
+    it "saves the rating" do
+      expect(page).to have_selector ".rateit[data-rateit-value='4']"
     end
 
     it "saves the flag changes" do

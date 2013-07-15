@@ -16,6 +16,11 @@
     </div>
     <div class="row">
       <div class="side_fields">
+        <div class="row">
+          <%= f.label :rating, "Rating", class: 'inline column large-3' %>
+          <%= f.range_field :rating, step: 1, min: 0, max: 5 %>
+          <div class="rateit" data-rateit-backingfld="#meal_rating"></div>
+        </div>
         <fieldset>
           <legend>Flags</legend>
           <% meal_flags.each do |desc, name| %>

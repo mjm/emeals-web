@@ -34,7 +34,7 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:entree_name, :side_name, flags: [])
+    params.require(:meal).permit(:entree_name, :side_name, :rating, flags: [])
   end
 
   helper_method :meal

@@ -11,7 +11,7 @@
       <div class="message"></div>
       <label for="meal_rating" class="inline column large-3">Rating</label>
       <input type="range" name="rating" step="1" min="0" max="5" value="<%= meal.rating %>" id="meal_rating">
-      <div class="rateit" data-rateit-backingfld="#meal_rating"></div>
+      <div class="autosubmit rateit" data-rateit-backingfld="#meal_rating"></div>
     <% end %>
 
     <% unless meal.flags.empty? %>
