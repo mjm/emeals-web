@@ -7,6 +7,7 @@
     <% else %>
       <table>
         <thead>
+        <th>Rating</th>
         <th>Entree</th>
         <th>Side Dish</th>
         <th class="options">Options</th>
@@ -14,6 +15,7 @@
         <tbody>
         <% meals.each do |meal| %>
           <tr>
+            <td><div class="rateit" data-rateit-value="<%= meal.rating %>" data-rateit-readonly="true"></div></td>
             <td><%= link_to meal.entree.name, meal_url(meal) %></td>
             <td><%= link_to meal.side.name, meal_url(meal) %></td>
             <td class="options">

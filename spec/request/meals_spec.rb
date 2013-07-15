@@ -44,6 +44,10 @@ feature "Meals list" do
       expect(page).to have_link "Delicious Side"
     end
 
+    it "displays the rating" do
+      expect(page).to have_selector ".rateit[data-rateit-value='2']"
+    end
+
     it "displays an edit button" do
       expect(page).to have_button "Edit"
     end
