@@ -3,11 +3,11 @@ language: ruby
 rvm:
 - 2.0.0
 before_script:
-- sudo apt-get install xpdf
+- sudo apt-get install xpdf qt4-default
 - psql -c 'create database emeals_test;' -U postgres
 - bin/rake db:setup db:test:prepare
 script:
-- bin/rake
+- xvfb-run bin/rake
 after_success:
 - ruby bin/travis_after_success
 - ruby bin/autodeliver_stories
