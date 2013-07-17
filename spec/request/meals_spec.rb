@@ -173,9 +173,10 @@ feature "Meal edit" do
   end
 
   it "populates fields for times" do
-    expect(page).to have_field "Prep Time", with: "10m"
-    expect(page).to have_field "Cook Time", with: "15m"
-    expect(page).to have_field "Total Time", with: "25m"
+    expect(page).to have_field "meal[prep_hours]", with: "0"
+    expect(page).to have_field "meal[prep_minutes]", with: "10"
+    expect(page).to have_field "meal[cook_minutes]", with: "15"
+    expect(page).to have_field "meal[total_minutes]", with: "25"
   end
 
   context "when the form is submitted" do
@@ -185,8 +186,9 @@ feature "Meal edit" do
       check "Marinate Ahead"
       uncheck "Slow Cooker"
       fill_in "Rating", with: "4"
-      fill_in "Prep Time", with: "45m"
-      fill_in "Total Time", with: "60m"
+      fill_in "meal[prep_minutes]", with: "45"
+      fill_in "meal[total_hours]", with: "1"
+      fill_in "meal[total_minutes]", with: "0"
 
       click_button "Save Meal Changes"
     end
@@ -211,8 +213,8 @@ feature "Meal edit" do
 
     it "saves the time changes" do
       click_link "Better Entree"
-      expect(page).to have_selector ".prep_time", "45m"
-      expect(page).to have_selector ".total_time", "60m"
+      expect(page).to have_selector ".prep_time", text: "45m"
+      expect(page).to have_selector ".total_time", text: "1h"
     end
   end
 end

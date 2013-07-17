@@ -30,11 +30,11 @@
         <fieldset>
           <legend>Times</legend>
           <%= f.label :prep_time, "Prep Time" %>
-          <%= f.text_field :prep_time %>
+          <%= time_fields f, :prep %>
           <%= f.label :cook_time, "Cook Time" %>
-          <%= f.text_field :cook_time %>
+          <%= time_fields f, :cook %>
           <%= f.label :total_time, "Total Time" %>
-          <%= f.text_field :total_time %>
+          <%= time_fields f, :total %>
         </fieldset>
       </div>
     </div>

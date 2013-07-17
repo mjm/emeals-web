@@ -109,5 +109,17 @@
     .side_fields {
       @include grid-column(4);
     }
+    .time_fields {
+      @include grid-row;
+    }
+    .hour_field, .minute_field {
+      @include grid-column(5, $collapse:true);
+    }
+    .hour_suffix, .minute_suffix {
+      @include grid-column(1, $collapse:true);
+    }
+    .minute_field {
+      margin-left: 1px;
+    }
   }
 }
