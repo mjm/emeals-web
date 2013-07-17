@@ -21,7 +21,7 @@
             <td class="options">
               <ul class="button-group">
                 <li><%= button_to "Edit", edit_meal_url(meal), method: 'get' %></li>
-                <li><%= button_to "Delete", meal_url(meal), method: 'delete' %></li>
+                <li><%= button_to "Delete", meal_url(meal), method: 'delete', data: {confirm: "Are you sure you want to delete this meal?"} %></li>
               </ul>
             </td>
           </tr>
