@@ -35,6 +35,7 @@ class MealsController < ApplicationController
 
   PERMITTED_MEAL_PARAMS = %w(
     entree_name side_name rating
+    entree_instructions side_instructions
     prep_hours prep_minutes
     cook_hours cook_minutes
     total_hours total_minutes

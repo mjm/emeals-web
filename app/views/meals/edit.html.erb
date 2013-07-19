@@ -7,15 +7,7 @@
 <article id="edit_meal">
   <%= form_for meal_form, url: meal_url(meal_form.meal), method: :put, as: :meal do |f| %>
     <div class="row">
-      <div class="dish_name_field">
-        <%= f.label :entree_name, "Entree Name" %>
-        <%= f.text_field :entree_name %>
-        <%= f.label :side_name, "Side Name" %>
-        <%= f.text_field :side_name %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="side_fields">
+      <aside class="side_fields">
         <div class="row">
           <%= f.label :rating, "Rating", class: 'inline column large-3' %>
           <%= f.range_field :rating, step: 1, min: 0, max: 5 %>
@@ -36,7 +28,29 @@
           <%= f.label :total_time, "Total Time" %>
           <%= time_fields f, :total %>
         </fieldset>
-      </div>
+      </aside>
+      <section class="recipe_content">
+        <div data-section="auto">
+          <section class="entree">
+            <p class="title" data-section-title><a href="#entree">Entree</a></p>
+            <div class="content" data-slug="entree" data-section-content>
+              <%= f.label :entree_name, "Entree Name" %>
+              <%= f.text_field :entree_name %>
+              <%= f.label :entree_instructions, "Instructions" %>
+              <%= f.text_area :entree_instructions %>
+            </div>
+          </section>
+          <section class="side">
+            <p class="title" data-section-title><a href="#side">Side</a></p>
+            <div class="content" data-slug="side" data-section-content>
+              <%= f.label :side_name, "Side Name" %>
+              <%= f.text_field :side_name %>
+              <%= f.label :side_instructions, "Instructions" %>
+              <%= f.text_area :side_instructions %>
+            </div>
+          </section>
+        </div>
+      </section>
     </div>
     <%= f.submit "Save Meal Changes" %>
   <% end %>

@@ -14,6 +14,9 @@ class MealForm < Form
     attribute :"#{time}_minutes", Integer
   end
 
+  attribute :entree_instructions, String
+  attribute :side_instructions, String
+
   validates :entree_name, :side_name, presence: true
   validates :rating, numericality: {less_than: 6, greater_than_or_equal_to: 0}
 
@@ -27,6 +30,9 @@ class MealForm < Form
     self.prep_hours, self.prep_minutes   = split_time(@meal.prep_time)
     self.cook_hours, self.cook_minutes   = split_time(@meal.cook_time)
     self.total_hours, self.total_minutes = split_time(@meal.total_time)
+
+    self.entree_instructions = @meal.entree.instructions
+    self.side_instructions   = @meal.side.instructions
   end
 
   protected
@@ -37,17 +43,29 @@ class MealForm < Form
     %w(prep cook total).each do |time|
       @meal[:"#{time}_time"] = join_time(send("#{time}_hours"), send("#{time}_minutes"))
     end
-    if @meal.new_record?
-      @meal.create_entree name: entree_name
-      @meal.create_side   name: side_name
-    else
-      @meal.entree.update name: entree_name
-      @meal.side.update   name: side_name
+    %w(entree side).each do |type|
+      create_or_update_dish(type)
     end
     @meal.save
   end
 
   private
+
+  def create_or_update_dish(type)
+    if meal.new_record?
+      meal.send("create_#{type}", self.send("#{type}_attributes"))
+    else
+      meal.send(type).update(self.send("#{type}_attributes"))
+    end
+  end
+
+  def entree_attributes
+    {name: entree_name, instructions: entree_instructions}
+  end
+
+  def side_attributes
+    {name: side_name, instructions: side_instructions}
+  end
 
   def split_time(time_string)
     TimeConverter.new.split(time_string)

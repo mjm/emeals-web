@@ -179,6 +179,20 @@ feature "Meal edit" do
     expect(page).to have_field "meal[total_minutes]", with: "25"
   end
 
+  def check_instructions(selector, text)
+    within(".recipe_content #{selector}") do
+      expect(page).to have_field "Instructions"
+      contents = find_field("Instructions").value
+      expect(contents).to match(text)
+      expect(contents.split("\n").size).to eq 3
+    end
+  end
+
+  it "populates the instruction field" do
+    check_instructions(".entree", "Sprinkle beef evenly")
+    check_instructions(".side", "Another set of instructions")
+  end
+
   context "when the form is submitted" do
     before :each do
       fill_in "Entree Name", with: "Better Entree"
@@ -189,6 +203,12 @@ feature "Meal edit" do
       fill_in "meal[prep_minutes]", with: "45"
       fill_in "meal[total_hours]", with: "1"
       fill_in "meal[total_minutes]", with: "0"
+      within ".recipe_content .entree" do
+        fill_in "Instructions", with: "Test instructions."
+      end
+      within ".recipe_content .side" do
+        fill_in "Instructions", with: "More test instructions."
+      end
 
       click_button "Save Meal Changes"
     end
@@ -215,6 +235,12 @@ feature "Meal edit" do
       click_link "Better Entree"
       expect(page).to have_selector ".prep_time", text: "45m"
       expect(page).to have_selector ".total_time", text: "1h"
+    end
+
+    it "saves the instructions" do
+      click_link "Better Entree"
+      expect(page).to have_selector 'ol.instructions li', text: "Test instructions."
+      expect(page).to have_selector 'ol.instructions li', text: "More test instructions."
     end
   end
 end

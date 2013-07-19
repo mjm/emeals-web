@@ -6,4 +6,8 @@ delicious_entree:
     Pour tomatoes and broth over beef.
 delicious_side:
   name: Delicious Side
+  instructions: |
+    Another set of instructions.
+    We should have some more.
+    Ok this is the last one.
 

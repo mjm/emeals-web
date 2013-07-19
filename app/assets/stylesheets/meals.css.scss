@@ -109,6 +109,26 @@
     .side_fields {
       @include grid-column(4);
     }
+    .recipe_content {
+      @include grid-column(8);
+      & > div {
+        @include section-container($section-type:accordion);
+        & > section {
+          @include section($section-type:accordion, $title-selector:".title", $content-selector:".content");
+        }
+
+        @media #{$small} {
+          @include section-container(false, $section-type:tabs);
+          & > section {
+            @include section($section-type:tabs, $title-selector:".title", $content-selector:".content");
+          }
+        }
+      }
+
+      textarea {
+        height: emCalc(300px);
+      }
+    }
     .time_fields {
       @include grid-row;
     }
