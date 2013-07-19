@@ -34,14 +34,17 @@ class MealsController < ApplicationController
   end
 
   PERMITTED_MEAL_PARAMS = %w(
-    entree_name side_name rating
-    entree_instructions side_instructions
+    rating
     prep_hours prep_minutes
     cook_hours cook_minutes
     total_hours total_minutes
   )
+  PERMITTED_DISH_PARAMS = %w(name instructions)
   def meal_params
-    params.require(:meal).permit(*PERMITTED_MEAL_PARAMS, flags: [])
+    params.require(:meal).permit(*PERMITTED_MEAL_PARAMS,
+                                 flags: [],
+                                 entree_attributes: PERMITTED_DISH_PARAMS,
+                                 side_attributes: PERMITTED_DISH_PARAMS)
   end
 
   helper_method :meal
