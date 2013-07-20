@@ -74,6 +74,10 @@ feature "Meal edit" do
   end
 
   context "when the form is submitted" do
+    def ingredient_field(field, index = 0)
+      "meal[entree_attributes][ingredients_attributes][#{index}][#{field}]"
+    end
+
     before :each do
       fill_in "Entree Name", with: "Better Entree"
       fill_in "Side Name", with: "Better Side"
@@ -83,9 +87,14 @@ feature "Meal edit" do
       fill_in "meal[prep_minutes]", with: "45"
       fill_in "meal[total_hours]", with: "1"
       fill_in "meal[total_minutes]", with: "0"
+
       within ".recipe_content .entree" do
         fill_in "Instructions", with: "Test instructions."
+        fill_in ingredient_field(:amount), with: "1/2"
+        select "cup", from: ingredient_field(:unit)
+        fill_in ingredient_field(:description), with: "beef broth"
       end
+
       within ".recipe_content .side" do
         fill_in "Instructions", with: "More test instructions."
       end
@@ -121,6 +130,11 @@ feature "Meal edit" do
       click_link "Better Entree"
       expect(page).to have_selector 'ol.instructions li', text: "Test instructions."
       expect(page).to have_selector 'ol.instructions li', text: "More test instructions."
+    end
+
+    it "saves the ingredients in order" do
+      click_link "Better Entree"
+      expect(page).to have_selector 'ul li.ingredient:first-child', text: "1/2 cup beef broth"
     end
   end
 end

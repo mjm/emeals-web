@@ -1,14 +1,17 @@
 ingredient_1:
+  id: 1001
   dish: delicious_entree
   amount: 3/2
   unit: lb
   description: beef stew meat
 ingredient_2:
+  id: 1002
   dish: delicious_entree
   amount: 1/2
   unit: teaspoon
   description: kosher salt
 ingredient_3:
+  id: 1003
   dish: delicious_entree
   amount: 14
   unit: oz
