@@ -16,7 +16,7 @@ class MealForm < Form
 
   validates :rating, numericality: {less_than: 6, greater_than_or_equal_to: 0}
 
-  accept_nested_attributes_for :entree, :side
+  accepts_nested_attributes_for :entree, :side
 
   def initialize(meal = Meal.new)
     @meal = meal

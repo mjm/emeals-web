@@ -5,7 +5,7 @@ class Form
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  def self.accept_nested_attributes_for(*keys)
+  def self.accepts_nested_attributes_for(*keys)
     keys.each do |key|
       define_method "#{key}_attributes=" do |attrs|
         self.send(key).attributes = attrs

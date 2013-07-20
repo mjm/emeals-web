@@ -1,6 +1,7 @@
 class Dish < ActiveRecord::Base
   #has_one :meal
   has_many :ingredients
+  accepts_nested_attributes_for :ingredients
 
   def instructions_list
     return [] if instructions.blank?

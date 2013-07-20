@@ -34,4 +34,8 @@ module MealsHelper
                 minutes_field(f, prefix),
                 class: "time_fields")
   end
+
+  def unit_field(f)
+    f.select :unit, Ingredient::Units, {include_blank: true}
+  end
 end

@@ -1,11 +1,11 @@
-<header id="meal_header">
+<header id="edit_meal_header">
   <div>
     <h2>Edit this Meal</h2>
   </div>
 </header>
 
 <article id="edit_meal">
-  <%= form_for meal_form, url: meal_url(meal_form.meal), method: :put, as: :meal do |f| %>
+  <%= form_for meal_form, url: meal_url(meal_form.meal), method: :put, as: :meal, html: {class: 'custom'} do |f| %>
     <div class="row">
       <aside class="side_fields">
         <div class="row">
@@ -37,6 +37,14 @@
               <%= f.fields_for :entree do |entree| %>
                 <%= entree.label :name, "Entree Name" %>
                 <%= entree.text_field :name %>
+                <label>Ingredients</label>
+                <%= entree.fields_for :ingredients do |ing| %>
+                  <div class="ingredient">
+                    <div class="amount_field"><%= ing.text_field :amount %></div>
+                    <div class="unit_field"><%= unit_field ing %></div>
+                    <div class="description_field"><%= ing.text_field :description %></div>
+                  </div>
+                <% end %>
                 <%= entree.label :instructions, "Instructions" %>
                 <%= entree.text_area :instructions %>
               <% end %>

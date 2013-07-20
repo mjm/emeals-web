@@ -91,26 +91,23 @@
 #edit_meal_header {
   @include grid-row;
   div {
-    @include grid-column(10, false, true, 1);
+    @include grid-column(12, false);
   }
 }
 
 #edit_meal {
   @include grid-row;
   form {
-    @include grid-column(10, false, true, 1);
+    @include grid-column(12, true);
 
     input[type=submit] {
       @include button;
     }
-    .dish_name_field {
-      @include grid-column(12, true);
-    }
     .side_fields {
-      @include grid-column(4);
+      @include grid-column(3);
     }
     .recipe_content {
-      @include grid-column(8);
+      @include grid-column(9);
       & > div {
         @include section-container($section-type:accordion);
         & > section {
@@ -140,6 +137,13 @@
     }
     .minute_field {
       margin-left: 1px;
+    }
+
+    .ingredient {
+      @include grid-row;
+      .amount_field { @include grid-column(1, $collapse: true); }
+      .unit_field { @include grid-column(2, $collapse: true); }
+      .description_field { @include grid-column(9, $collapse:true); }
     }
   }
 }
