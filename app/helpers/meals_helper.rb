@@ -38,6 +38,10 @@ module MealsHelper
                                                     id: "meal_flags_#{name}") \
                             + "\n" + desc)
     end
+
+    def range_field(*args)
+      super(*args) + @template.content_tag(:div, "", :class => 'rateit', 'data-rateit-backingfld' => "##{@object_name}_#{args.first}")
+    end
   end
 
   def show_flags(meal)
