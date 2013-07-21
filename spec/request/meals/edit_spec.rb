@@ -2,6 +2,7 @@ require 'spec_helper'
 
 feature "Meal edit" do
   fixtures :meals, :dishes, :ingredients
+  include RequestHelper
 
   let(:meal) { meals(:delicious) }
 
@@ -35,15 +36,6 @@ feature "Meal edit" do
     expect(page).to have_field "meal[total_minutes]", with: "25"
   end
 
-  def check_instructions(selector, text)
-    within(".recipe_content #{selector}") do
-      expect(page).to have_field "Instructions"
-      contents = find_field("Instructions").value
-      expect(contents).to match(text)
-      expect(contents.split("\n").size).to eq 3
-    end
-  end
-
   it "populates the instruction field" do
     check_instructions(".entree", "Sprinkle beef evenly")
     check_instructions(".side", "Another set of instructions")
@@ -71,70 +63,119 @@ feature "Meal edit" do
         expect(page).to have_selector 'option[value=teaspoon][selected=selected]'
       end
     end
+
+    it "has a button to add ingredients" do
+      within ".recipe_content .side" do
+        expect(page).to have_button "Add Ingredient"
+      end
+    end
+
+    describe "clicking the Add Ingredient button", js: true do
+      describe "when there are no existing ingredients" do
+        before :each do
+          click_link "Side"
+          click_button "Add Ingredient"
+        end
+
+        it "adds new ingredient fields in the appropriate place" do
+          within ".recipe_content .side .ingredients" do
+            expect(page).to have_field ingredient_field(:side, :amount, 0)
+            expect(page).to have_field ingredient_field(:side, :unit, 0), visible: false
+            expect(page).to have_field ingredient_field(:side, :description, 0)
+          end
+        end
+      end
+
+      describe "when there are existing ingredients" do
+        before :each do
+          click_link "Entree"
+          click_button "Add Ingredient"
+        end
+
+        it "adds new ingredient fields in the appropriate place" do
+          within ".recipe_content .entree .ingredients" do
+            expect(page).to have_field ingredient_field(:entree, :amount, 3)
+            expect(page).to have_field ingredient_field(:entree, :unit, 3), visible: false
+            expect(page).to have_field ingredient_field(:entree, :description, 3)
+          end
+        end
+      end
+    end
   end
 
   context "when the form is submitted" do
-    def ingredient_field(field, index = 0)
-      "meal[entree_attributes][ingredients_attributes][#{index}][#{field}]"
-    end
-
-    before :each do
-      fill_in "Entree Name", with: "Better Entree"
-      fill_in "Side Name", with: "Better Side"
-      check "Marinate Ahead"
-      uncheck "Slow Cooker"
-      fill_in "Rating", with: "4"
-      fill_in "meal[prep_minutes]", with: "45"
-      fill_in "meal[total_hours]", with: "1"
-      fill_in "meal[total_minutes]", with: "0"
-
-      within ".recipe_content .entree" do
-        fill_in "Instructions", with: "Test instructions."
-        fill_in ingredient_field(:amount), with: "1/2"
-        select "cup", from: ingredient_field(:unit)
-        fill_in ingredient_field(:description), with: "beef broth"
-      end
-
-      within ".recipe_content .side" do
-        fill_in "Instructions", with: "More test instructions."
-      end
-
-      click_button "Save Meal Changes"
-    end
-
     it "saves the entree name" do
+      submit_meal_with { fill_in "Entree Name", with: "Better Entree" }
       expect(page).to have_content "Better Entree"
     end
 
     it "saves the side name" do
+      submit_meal_with { fill_in "Side Name", with: "Better Side" }
       expect(page).to have_content "Better Side"
     end
 
     it "saves the rating" do
+      submit_meal_with { fill_in "Rating", with: "4" }
       expect(page).to have_selector ".rateit[data-rateit-value='4']"
     end
 
     it "saves the flag changes" do
-      click_link "Better Entree"
+      submit_meal_with do
+        check "Marinate Ahead"
+        uncheck "Slow Cooker"
+      end
+      click_link "Delicious Entree"
+
       expect(page).to have_content "Marinate ahead"
       expect(page).to_not have_content "Slow cooker"
     end
 
     it "saves the time changes" do
-      click_link "Better Entree"
+      submit_meal_with do
+        fill_in "meal[prep_minutes]", with: "45"
+        fill_in "meal[total_hours]", with: "1"
+        fill_in "meal[total_minutes]", with: "0"
+      end
+      click_link "Delicious Entree"
+
       expect(page).to have_selector ".prep_time", text: "45m"
       expect(page).to have_selector ".total_time", text: "1h"
     end
 
     it "saves the instructions" do
-      click_link "Better Entree"
+      submit_meal_with do
+        within(".recipe_content .entree") { fill_in "Instructions", with: "Test instructions." }
+        within(".recipe_content .side")   { fill_in "Instructions", with: "More test instructions." }
+      end
+      click_link "Delicious Entree"
+
       expect(page).to have_selector 'ol.instructions li', text: "Test instructions."
       expect(page).to have_selector 'ol.instructions li', text: "More test instructions."
     end
 
-    it "saves the ingredients in order" do
-      click_link "Better Entree"
+    it "saves existing ingredients that were edited in order" do
+      submit_meal_with do
+        within ".recipe_content .entree" do
+          fill_in ingredient_field(:entree, :amount), with: "1/2"
+          select "cup", from: ingredient_field(:entree, :unit)
+          fill_in ingredient_field(:entree, :description), with: "beef broth"
+        end
+      end
+      click_link "Delicious Entree"
+
       expect(page).to have_selector 'ul li.ingredient:first-child', text: "1/2 cup beef broth"
+    end
+
+    it "saves newly added ingredients", js: true do
+      submit_meal_with do
+        click_button "Add Ingredient"
+        fill_in ingredient_field(:entree, :amount, 3), with: "1/2"
+        select "cup", from: ingredient_field(:entree, :unit, 3), visible: false
+        fill_in ingredient_field(:entree, :description, 3), with: "beef broth"
+      end
+      click_link "Delicious Entree"
+
+      expect(page).to have_selector 'ul li.ingredient', text: "1/2 cup beef broth"
     end
   end
 end

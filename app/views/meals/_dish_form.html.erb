@@ -5,13 +5,25 @@
       <%= dish.label :name, "#{type.to_s.capitalize} Name" %>
       <%= dish.text_field :name %>
       <label>Ingredients</label>
-      <%= dish.fields_for :ingredients do |ing| %>
-        <div class="ingredient">
-          <div class="amount_field"><%= ing.text_field :amount %></div>
-          <div class="unit_field"><%= ing.unit_field %></div>
-          <div class="description_field"><%= ing.text_field :description %></div>
+      <div class="ingredients">
+        <div class="ingredient_template">
+          <%= meal_fields_for "meal[#{type}_attributes][ingredients_attributes][$IDX$]", Ingredient.new do |ing| %>
+            <div class="ingredient">
+              <div class="amount_field"><%= ing.text_field :amount, disabled: true %></div>
+              <div class="unit_field"><%= ing.unit_field :unit, disabled: true %></div>
+              <div class="description_field"><%= ing.text_field :description, disabled: true %></div>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+        <%= dish.fields_for :ingredients do |ing| %>
+          <div class="ingredient">
+            <div class="amount_field"><%= ing.text_field :amount %></div>
+            <div class="unit_field"><%= ing.unit_field %></div>
+            <div class="description_field"><%= ing.text_field :description %></div>
+          </div>
+        <% end %>
+      </div>
+      <button class="add_ingredient small">Add Ingredient</button>
       <%= dish.label :instructions, "Instructions" %>
       <%= dish.text_area :instructions %>
     <% end %>

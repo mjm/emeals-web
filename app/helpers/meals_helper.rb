@@ -1,7 +1,8 @@
 module MealsHelper
   class MealsFormBuilder < ActionView::Helpers::FormBuilder
-    def unit_field(field = :unit)
-      select field, Ingredient::Units, include_blank: true
+    def unit_field(field = :unit, html_options = {})
+      html_options[:class] = 'no-custom' if html_options[:disabled]
+      select field, Ingredient::Units, {include_blank: true}, html_options
     end
 
     def time_field(prefix, type)
@@ -35,8 +36,8 @@ module MealsHelper
                             @template.check_box_tag("meal[flags][]",
                                                     name,
                                                     @object.flags.include?(name.to_s),
-                                                    id: "meal_flags_#{name}") \
-                            + "\n" + desc)
+                                                    id: "meal_flags_#{name}") +
+                            "\n" + desc)
     end
 
     def range_field(*args)
@@ -46,6 +47,11 @@ module MealsHelper
 
   def show_flags(meal)
     meal.flags.map(&:humanize).join(", ")
+  end
+
+  def meal_fields_for(record, *args, &block)
+    options = args.extract_options!
+    fields_for(record, *(args << options.merge(builder: MealsFormBuilder)), &block)
   end
 
   def meal_form_for(record, *args, &block)
