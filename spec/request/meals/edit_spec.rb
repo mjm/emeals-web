@@ -64,6 +64,14 @@ feature "Meal edit" do
       end
     end
 
+    it "hides ingredients that will be deleted", js: true do
+      within ".recipe_content .entree" do
+        expect(page).to have_selector 'input[value="beef stew meat"]'
+        find(".delete a", match: :first).click
+        expect(page).to have_no_selector 'input[value="beef stew meat"]'
+      end
+    end
+
     it "has a button to add ingredients" do
       within ".recipe_content .side" do
         expect(page).to have_button "Add Ingredient"
@@ -176,6 +184,28 @@ feature "Meal edit" do
       click_link "Delicious Entree"
 
       expect(page).to have_selector 'ul li.ingredient', text: "1/2 cup beef broth"
+    end
+
+    it "removes ingredients marked for deletion", js: true do
+      submit_meal_with do
+        within(".recipe_content .entree") do
+          find(".delete a", match: :first).click
+        end
+      end
+      click_link "Delicious Entree"
+
+      expect(page).to have_content "1/2 teaspoon kosher salt"
+      expect(page).to have_no_content "3/2 lb beef stew meat"
+    end
+
+    it "does not add blank ingredients", js: true do
+      submit_meal_with do
+        click_button "Add Ingredient"
+      end
+      click_link "Delicious Entree"
+
+      expect(page).to have_content "1/2 teaspoon kosher salt"
+      expect(all(".ingredient").size).to eq 3
     end
   end
 end

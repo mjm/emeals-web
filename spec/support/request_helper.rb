@@ -12,10 +12,10 @@ module RequestHelper
     "meal[#{type}_attributes][ingredients_attributes][#{index}][#{field}]"
   end
 
-  def submit_meal_with
+  def submit_meal_with(&block)
     visit "/"
     click_button "Edit"
-    yield
+    instance_eval(&block)
 
     click_button "Save Meal Changes"
   end

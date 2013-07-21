@@ -32,6 +32,10 @@ addIngredient = (event) ->
   event.preventDefault()
   new Ingredients($(this).parent()).add()
 
+deleteIngredient = (event) ->
+  event.preventDefault()
+  $(this).closest('.ingredient').hide().find('input[name*="_destroy"]').val(true)
+
 refreshPage = ->
   $(this).foundation('section', 'reflow')
   $('.rateit').rateit()
@@ -47,5 +51,6 @@ bindEvents = ->
   @on "ajax:success", ".rate_meal", showRatingSuccess
   @on "click", ".rateit.autosubmit", submitRating
   @on "click", ".add_ingredient", addIngredient
+  @on "click", ".delete a", deleteIngredient
 
 bindEvents.call($(document))
