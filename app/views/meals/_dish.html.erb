@@ -1,8 +1,8 @@
-<section class="hrecipe">
-  <p class="fn" data-section-title>
-    <a href="#<%= type %>"><%= dish.name %></a>
-  </p>
-  <div class="recipe-content" data-slug="<%= type %>" data-section-content>
+<%= section type, class: 'hrecipe' do |s| %>
+  <% s.title class: 'fn' do %>
+    <%= dish.name %>
+  <% end %>
+  <% s.content class: 'recipe-content' do %>
     <h4>Ingredients</h4>
     <ul>
       <% dish.ingredients.each do |i| %>
@@ -19,6 +19,5 @@
         <li><%= i %></li>
       <% end %>
     </ol>
-  </div>
-</section>
-
+  <% end %>
+<% end %>

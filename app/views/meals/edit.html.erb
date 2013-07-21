@@ -31,9 +31,9 @@
       </aside>
       <section class="recipe_content">
         <div data-section="auto">
-          <section class="entree">
-            <p class="title" data-section-title><a href="#entree">Entree</a></p>
-            <div class="content" data-slug="entree" data-section-content>
+          <%= section :entree, class: 'entree' do |s| %>
+            <% s.title class: 'title' do %>Entree<% end %>
+            <% s.content class: 'content' do %>
               <%= f.fields_for :entree do |entree| %>
                 <%= entree.label :name, "Entree Name" %>
                 <%= entree.text_field :name %>
@@ -48,19 +48,19 @@
                 <%= entree.label :instructions, "Instructions" %>
                 <%= entree.text_area :instructions %>
               <% end %>
-            </div>
-          </section>
-          <section class="side">
-            <p class="title" data-section-title><a href="#side">Side</a></p>
-            <div class="content" data-slug="side" data-section-content>
+            <% end %>
+          <% end %>
+          <%= section :side, class: 'side' do |s| %>
+            <% s.title class: 'title' do %>Side<% end %>
+            <% s.content class: 'content' do %>
               <%= f.fields_for :side do |side| %>
                 <%= side.label :name, "Side Name" %>
                 <%= side.text_field :name %>
                 <%= side.label :instructions, "Instructions" %>
                 <%= side.text_area :instructions %>
               <% end %>
-            </div>
-          </section>
+            <% end %>
+          <% end %>
         </div>
       </section>
     </div>
