@@ -5,7 +5,7 @@
 </header>
 
 <article id="edit_meal">
-  <%= form_for meal_form, url: meal_url(meal_form.meal), method: :put, as: :meal, html: {class: 'custom'} do |f| %>
+  <%= meal_form_for meal_form, url: meal_url(meal_form.meal), method: :put, html: {class: 'custom'} do |f| %>
     <div class="row">
       <aside class="side_fields">
         <div class="row">
@@ -15,18 +15,16 @@
         </div>
         <fieldset>
           <legend>Flags</legend>
-          <% meal_flags.each do |desc, name| %>
-            <%= flag_field desc, name %>
-          <% end %>
+          <%= f.flag_fields %>
         </fieldset>
         <fieldset>
           <legend>Times</legend>
           <%= f.label :prep_time, "Prep Time" %>
-          <%= time_fields f, :prep %>
+          <%= f.time_fields :prep %>
           <%= f.label :cook_time, "Cook Time" %>
-          <%= time_fields f, :cook %>
+          <%= f.time_fields :cook %>
           <%= f.label :total_time, "Total Time" %>
-          <%= time_fields f, :total %>
+          <%= f.time_fields :total %>
         </fieldset>
       </aside>
       <section class="recipe_content">
@@ -41,7 +39,7 @@
                 <%= entree.fields_for :ingredients do |ing| %>
                   <div class="ingredient">
                     <div class="amount_field"><%= ing.text_field :amount %></div>
-                    <div class="unit_field"><%= unit_field ing %></div>
+                    <div class="unit_field"><%= ing.unit_field %></div>
                     <div class="description_field"><%= ing.text_field :description %></div>
                   </div>
                 <% end %>
