@@ -1,0 +1,19 @@
+<%= section type, class: type do |s| %>
+  <% s.title class: 'title' do %><%= type.to_s.capitalize %><% end %>
+  <% s.content class: 'content' do %>
+    <%= f.fields_for type do |dish| %>
+      <%= dish.label :name, "#{type.to_s.capitalize} Name" %>
+      <%= dish.text_field :name %>
+      <label>Ingredients</label>
+      <%= dish.fields_for :ingredients do |ing| %>
+        <div class="ingredient">
+          <div class="amount_field"><%= ing.text_field :amount %></div>
+          <div class="unit_field"><%= ing.unit_field %></div>
+          <div class="description_field"><%= ing.text_field :description %></div>
+        </div>
+      <% end %>
+      <%= dish.label :instructions, "Instructions" %>
+      <%= dish.text_area :instructions %>
+    <% end %>
+  <% end %>
+<% end %>

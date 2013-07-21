@@ -29,36 +29,8 @@
       </aside>
       <section class="recipe_content">
         <div data-section="auto">
-          <%= section :entree, class: 'entree' do |s| %>
-            <% s.title class: 'title' do %>Entree<% end %>
-            <% s.content class: 'content' do %>
-              <%= f.fields_for :entree do |entree| %>
-                <%= entree.label :name, "Entree Name" %>
-                <%= entree.text_field :name %>
-                <label>Ingredients</label>
-                <%= entree.fields_for :ingredients do |ing| %>
-                  <div class="ingredient">
-                    <div class="amount_field"><%= ing.text_field :amount %></div>
-                    <div class="unit_field"><%= ing.unit_field %></div>
-                    <div class="description_field"><%= ing.text_field :description %></div>
-                  </div>
-                <% end %>
-                <%= entree.label :instructions, "Instructions" %>
-                <%= entree.text_area :instructions %>
-              <% end %>
-            <% end %>
-          <% end %>
-          <%= section :side, class: 'side' do |s| %>
-            <% s.title class: 'title' do %>Side<% end %>
-            <% s.content class: 'content' do %>
-              <%= f.fields_for :side do |side| %>
-                <%= side.label :name, "Side Name" %>
-                <%= side.text_field :name %>
-                <%= side.label :instructions, "Instructions" %>
-                <%= side.text_area :instructions %>
-              <% end %>
-            <% end %>
-          <% end %>
+          <%= render partial: 'dish_form', locals: {type: :entree, f: f} %>
+          <%= render partial: 'dish_form', locals: {type: :side, f: f} %>
         </div>
       </section>
     </div>
