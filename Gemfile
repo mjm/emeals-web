@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'emeals'
 gem 'pg'
-gem 'zurb-foundation'
+gem 'zurb-foundation', '4.2.3'
 gem 'virtus'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
