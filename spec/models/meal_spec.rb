@@ -13,20 +13,30 @@ describe Meal do
   end
 
   describe "search" do
-    let(:tire) { double(:tire, search: []) }
-    let(:load_options) { {include: [:entree, :side]} }
+    describe "if a search query is provided" do
+      let(:tire) { double(:tire, search: []) }
+      let(:load_options) { {include: [:entree, :side]} }
 
-    before do
-      expect(Meal).to receive(:tire).and_return(tire)
-      Meal.search('blah')
+      before do
+        expect(Meal).to receive(:tire).and_return(tire)
+        Meal.search('blah')
+      end
+
+      it "passes along the search query" do
+        expect(tire).to have_received(:search).with('blah', anything)
+      end
+
+      it "tells Tire to load record with associations" do
+        expect(tire).to have_received(:search).with(kind_of(String), load: load_options)
+      end
     end
 
-    it "passes along the search query" do
-      expect(tire).to have_received(:search).with('blah', anything)
-    end
+    describe "if a blank search query is provided" do
+      let(:query) { Meal.search('').arel }
 
-    it "tells Tire to load record with associations" do
-      expect(tire).to have_received(:search).with(kind_of(String), load: load_options)
+      it "loads the meals in order" do
+        expect(query.orders.first.downcase).to eq 'created_at desc'
+      end
     end
   end
 end

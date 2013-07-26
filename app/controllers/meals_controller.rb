@@ -59,6 +59,6 @@ class MealsController < ApplicationController
 
   helper_method :meals
   def meals
-    Meal.order('created_at desc').includes(:entree, :side)
+    @meals ||= Meal.search(params[:q])
   end
 end

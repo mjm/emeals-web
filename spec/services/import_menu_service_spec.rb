@@ -17,7 +17,7 @@ describe ImportMenuService do
     describe "each created meal" do
       before :each do
         subject.import("some_menu.pdf")
-        @meal = Meal.first
+        @meal = Meal.order(:id).first
       end
 
       it "has an entree" do

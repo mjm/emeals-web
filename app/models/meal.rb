@@ -16,7 +16,10 @@ class Meal < ActiveRecord::Base
     indexes :side_name, as: 'side.name'
   end
 
+  default_scope -> { order('created_at DESC').includes(:entree) }
+
   def self.search(query)
+    return all if query.blank?
     tire.search(query, load: {include: [:entree, :side]})
   end
 end
