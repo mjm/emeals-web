@@ -1,11 +1,21 @@
+
 <div class="row">
   <section id="meals">
     <h2>Your Saved Meals</h2>
 
+    <div class="row">
+      <%= form_tag meals_url, method: :get do %>
+        <div class="column large-1"><label class="inline" for="q">Search</label></div>
+        <div class="column large-4"><%= text_field_tag :q, params[:q] %></div>
+        <div class="column large-1"><button class="small">Search</button></div>
+        <div class="column large-6"></div>
+      <% end %>
+    </div>
+
     <% if meals.empty? %>
       <p>You haven't uploaded any meals!</p>
     <% else %>
-      <table>
+      <table id="meals_list">
         <thead>
         <th>Rating</th>
         <th>Entree</th>

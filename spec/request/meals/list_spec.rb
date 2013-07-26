@@ -18,6 +18,10 @@ feature "Meals list" do
     expect(page).to have_selector "h2", text: "Your Saved Meals"
   end
 
+  it "has a search field" do
+    expect(page).to have_field "Search"
+  end
+
   context "when there are no meals to list" do
     before :each do
       Meal.delete_all
