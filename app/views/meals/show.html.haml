@@ -1,0 +1,22 @@
+%header#meal_header
+  %div
+    %h2= meal.entree.name
+    %h3.subheader= meal.side.name
+
+%section#meal_content
+  %aside
+    = form_tag rate_meal_url(meal), method: :patch, remote: true, class: 'rate_meal' do
+      .message
+      %label.inline.column.large-3(for="meal_rating") Rating
+      %input#meal_rating{type: "range", name: "rating", step: "1", min: "0", max: "5", value: meal.rating}
+      .autosubmit.rateit{data: {rateit_backingfld: "#meal_rating"}}
+    - unless meal.flags.empty?
+      .meal_flag= show_flags meal
+    %ul.meal_times
+      %li.total_time Total Time: #{meal.total_time}
+      %li.prep_time Prep Time: #{meal.prep_time}
+      %li.cook_time Cook Time: #{meal.cook_time}
+  %article
+    .recipe-container{data: {section: "tabs"}}
+      = render partial: 'dish', locals: {dish: meal.entree, type: 'entree'}
+      = render partial: 'dish', locals: {dish: meal.side, type: 'side'}

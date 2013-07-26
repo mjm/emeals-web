@@ -76,6 +76,8 @@ GEM
     guard-rspec (3.0.2)
       guard (>= 1.8)
       rspec (~> 2.13)
+    haml (4.0.3)
+      tilt
     happymapper (0.4.0)
       libxml-ruby (~> 2.0)
     hashr (0.0.22)
@@ -243,6 +245,7 @@ DEPENDENCIES
   debugger
   emeals
   guard-rspec
+  haml
   heroku-headless
   jbuilder (~> 1.2)
   jquery-rails

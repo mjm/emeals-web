@@ -1,0 +1,29 @@
+%header#edit_meal_header
+  %div
+    %h2 Edit this Meal
+
+%article#edit_meal
+  = meal_form_for meal_form, url: meal_url(meal_form.meal), method: :put, html: {class: 'custom'} do |f|
+    .row
+      %aside.side_fields
+        .row
+          = f.label :rating, "Rating", class: 'inline column large-3'
+          = f.range_field :rating, step: 1, min: 0, max: 5
+        %fieldset
+          %legend Flags
+          = f.flag_fields
+        %fieldset
+          %legend Times
+          = f.label :prep_time, "Prep Time"
+          = f.time_fields :prep
+          = f.label :cook_time, "Cook Time"
+          = f.time_fields :cook
+          = f.label :total_time, "Total Time"
+          = f.time_fields :total
+      %section.recipe_content
+        %div{data: {section: 'auto'}}
+          = render partial: 'dish_form', locals: {type: :entree, f: f}
+          = render partial: 'dish_form', locals: {type: :side, f: f}
+
+    .row
+      .column.large-offset-3= f.submit "Save Meal Changes"

@@ -1,0 +1,39 @@
+.row
+  %section#meals
+    %h2 Your Saved Meals
+    .row
+      = form_tag meals_url, method: :get do
+        .column.large-1
+          %label.inline(for="q") Search
+        .column.large-4
+          = text_field_tag :q, params[:q]
+        .column.large-1
+          %button.small Search
+        .column.large-6
+    - if meals.empty?
+      %p You haven't uploaded any meals!
+    - else
+      %table#meals_list
+        %thead
+          %th Rating
+          %th Entree
+          %th Side Dish
+          %th.options Options
+        %tbody
+          - meals.each do |meal|
+            %tr
+              %td
+                .rateit{data: {rateit_value: meal.rating, rateit_readonly: "true"}}
+              %td= link_to meal.entree.name, meal_url(meal)
+              %td= link_to meal.side.name, meal_url(meal)
+              %td.options
+                %ul.button-group
+                  %li= button_to "Edit", edit_meal_url(meal), method: :get
+                  %li= button_to "Delete", meal_url(meal), method: :delete, data: {confirm: "Are you sure you want to delete this meal?"}
+
+.row
+  %section#upload_form
+    %h3 Upload a Menu
+    = form_tag upload_meals_url, multipart: true do
+      = file_field_tag :menu
+      = submit_tag "Upload"

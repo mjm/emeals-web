@@ -1,0 +1,16 @@
+= section type, class: 'hrecipe' do |s|
+  - s.title class: 'fn' do
+    = dish.name
+  - s.content class: 'recipe-content' do
+    %h4 Ingredients
+    %ul
+      - dish.ingredients.each do |ing|
+        %li.ingredient
+          %span.value= ing.amount
+          - unless ing.unit.blank?
+            %span.type= ing.unit
+          = ing.description
+    %h4 Instructions
+    %ol.instructions
+      - dish.instructions_list.each do |instruction|
+        %li= instruction
