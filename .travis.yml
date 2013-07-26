@@ -2,6 +2,8 @@
 language: ruby
 rvm:
 - 2.0.0
+services:
+- elasticsearch
 before_script:
 - sudo apt-get install xpdf
 - psql -c 'create database emeals_test;' -U postgres

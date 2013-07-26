@@ -3,7 +3,7 @@
 require 'heroku-headless'
 
 HerokuHeadless.configure do |config|
-  config.post_deploy_commands = ['rake db:migrate']
+  config.post_deploy_commands = ['rake db:migrate tire:import:all']
   config.restart_processes = true
 end
 
