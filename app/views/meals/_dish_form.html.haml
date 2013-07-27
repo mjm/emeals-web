@@ -9,24 +9,9 @@
       .ingredients
         .ingredient_template
           = meal_fields_for "meal[#{type}_attributes][ingredients_attributes][$IDX$]", Ingredient.new do |ing|
-            .ingredient
-              = ing.hidden_field :_destroy, disabled: true
-              .amount_field= ing.text_field :amount, disabled: true
-              .unit_field= ing.unit_field :unit, disabled: true
-              .description_field= ing.text_field :description, disabled: true
-              .delete
-                %a(href="#")
-                  %i.foundicon-minus
-
+            = render partial: 'ingredient_form', locals: {ing: ing, disabled: true}
         = dish.fields_for :ingredients do |ing|
-          .ingredient
-            = ing.hidden_field :_destroy
-            .amount_field= ing.text_field :amount
-            .unit_field= ing.unit_field
-            .description_field= ing.text_field :description
-            .delete
-              %a(href="#")
-                %i.foundicon-minus
+          = render partial: 'ingredient_form', locals: {ing: ing, disabled: false}
       %button.add_ingredient.small.button Add Ingredient
       = dish.label :instructions, "Instructions"
       ~ dish.text_area :instructions

@@ -1,0 +1,8 @@
+.ingredient
+  = ing.hidden_field :_destroy, disabled: disabled
+  .amount_field= ing.text_field :amount, disabled: disabled
+  .unit_field= ing.unit_field :unit, disabled: disabled
+  .description_field= ing.text_field :description, disabled: disabled
+  .delete
+    %a(href="#")
+      %i.foundicon-minus
