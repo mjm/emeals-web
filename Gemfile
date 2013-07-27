@@ -6,6 +6,7 @@ gem 'zurb-foundation', '4.2.3'
 gem 'virtus'
 gem 'tire'
 gem 'haml'
+gem 'will_paginate', '~> 3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'

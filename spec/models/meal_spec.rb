@@ -27,7 +27,7 @@ describe Meal do
       end
 
       it "tells Tire to load record with associations" do
-        expect(tire).to have_received(:search).with(kind_of(String), load: load_options)
+        expect(tire).to have_received(:search).with(kind_of(String), load: load_options, page: 1, per_page: 20)
       end
     end
 

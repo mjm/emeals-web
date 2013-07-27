@@ -4,7 +4,7 @@ class MealsController < ApplicationController
 
   data(:meal)      { Meal.find(params[:id]) }
   data(:meal_form) { MealForm.new(meal) }
-  data(:meals)     { Meal.search(params[:q]) }
+  data(:meals)     { Meal.search(params[:q], params[:page]) }
 
   def index; end
 

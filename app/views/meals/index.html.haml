@@ -1,15 +1,16 @@
 .row
   %section#meals
-    %h2 Your Saved Meals
     .row
-      = form_tag meals_url, method: :get do
+      .column.large-5
+        %h2 Your Saved Meals
+      = form_tag meals_url, method: :get, id: "search" do
         .column.large-1
           %label.inline(for="q") Search
         .column.large-4
           = text_field_tag :q, params[:q]
         .column.large-1
           %button.small Search
-        .column.large-6
+        .column.large-1
     - if meals.empty?
       %p You haven't uploaded any meals!
     - else
@@ -30,6 +31,7 @@
                 %ul.button-group
                   %li= button_to "Edit", edit_meal_url(meal), method: :get
                   %li= button_to "Delete", meal_url(meal), method: :delete, data: {confirm: "Are you sure you want to delete this meal?"}
+      = will_paginate meals
 
 .row
   %section#upload_form

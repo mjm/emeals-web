@@ -60,5 +60,26 @@ feature "Meals list" do
       expect(page).to have_button "Delete"
     end
   end
+
+  context "when there are more than 20 meals in the system" do
+    before :each do
+      30.times do |i|
+        Meal.create!(entree: Dish.new(name: "Entree #{i+1}"),
+                     side:   Dish.new(name: "Side #{i+1}"))
+      end
+
+      visit "/"
+    end
+
+    it "only displays the first 20 meals" do
+      expect(page).to have_content "Entree 30"
+      expect(all("#meals_list tr").size).to eq 20
+    end
+
+    it "displays a pagination bar" do
+      expect(page).to have_selector "em", text: "1"
+      expect(page).to have_selector "a", text: "2"
+    end
+  end
 end
 
