@@ -62,7 +62,6 @@ GEM
     diff-lcs (1.2.4)
     emeals (0.1.2)
     erubis (2.7.0)
-    excon (0.25.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
     ffi (1.9.0)
@@ -81,11 +80,6 @@ GEM
     happymapper (0.4.0)
       libxml-ruby (~> 2.0)
     hashr (0.0.22)
-    heroku-api (0.3.14)
-      excon (~> 0.25.1)
-    heroku-headless (0.2.1)
-      heroku-api
-      rendezvous
     hike (1.2.3)
     i18n (0.6.4)
     jbuilder (1.4.2)
@@ -162,7 +156,6 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    rendezvous (0.0.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.14.1)
@@ -247,7 +240,6 @@ DEPENDENCIES
   emeals
   guard-rspec
   haml
-  heroku-headless
   jbuilder (~> 1.2)
   jquery-rails
   launchy
