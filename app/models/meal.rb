@@ -14,6 +14,8 @@ class Meal < ActiveRecord::Base
     indexes :id, index: :not_analyzed
     indexes :entree_name, as: 'entree.name'
     indexes :side_name, as: 'side.name'
+    indexes :entree_instructions, as: 'entree.instructions'
+    indexes :side_instructions, as: 'side.instructions'
   end
 
   default_scope -> { order('created_at DESC').includes(:entree, :side) }
