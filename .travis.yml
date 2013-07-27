@@ -1,4 +1,3 @@
----
 language: ruby
 rvm:
 - 2.0.0
@@ -11,15 +10,20 @@ before_script:
 script:
 - xvfb-run bin/rake
 after_success:
-- ruby bin/travis_after_success
 - ruby bin/autodeliver_stories
 env:
   global:
   - secure: |-
-      YN42RDCnKtIFZUQ/CwUbK1t1P2G19pAdJPKc0kJwcYWEQXbKvOSwA0Ek78Bx
-      JseGCzq5OmnDyZ7IAQBC2g/oHg4WeDIKVYuhjeO0qyFmq6YmvTW11sg++jjW
-      w3ZDQiISaMFISqz7PtTy7Adw6NLKyhAVSwP3mbWNuQ1bVQ4AgrY=
-  - secure: |-
       n5lSKUy852vhUGTeVaNzWQ8XvAuJgE0JR0wFhBRLZwYbF0SR1vlXTPykup2g
       tHSHdzys91gejqgl+3RJ/t6In4Eq102qCTe2O+xUoYavl9vr9CY4d2QwKfg7
       84lDZGIYRVu4yveQVT+EZFdna0iUAkMs06pGC7g56TOMP7/H9Q8=
+deploy:
+  provider: heroku
+  api_key:
+    secure: CbzE+783uWof0830seJMVaGs6dLglVQU2z7164SoRIXI5CiBjcnAWlWYQVIvjns8NIHix08Ne+nx6rfVFwUUj83enxY1WW67hVsaZZXoUVZVh0kH9tlX8knxLum/2xzVj5oOTAO/Yk5so1GakxPNyMj/VQYHw1yimH0UpXR1/9g=
+  app: emeals-staging
+  on:
+    repo: mjm/emeals-web
+  run:
+  - "rake db:migrate tire:import:all"
+  - restart

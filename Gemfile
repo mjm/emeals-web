@@ -61,7 +61,6 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-mocks', '~> 2.14.0.rc1'
   gem 'rspec-rails', '~> 2.14.0.rc1'
-  gem 'heroku-headless'
   gem 'pivotal-tracker'
   gem 'launchy'
   gem 'capybara-webkit'
