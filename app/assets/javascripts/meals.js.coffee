@@ -49,7 +49,7 @@ showRatingSuccess = ->
 bindEvents = ->
   @on "page:load", refreshPage
   @on "ajax:success", ".rate_meal", showRatingSuccess
-  @on "click", ".rateit.autosubmit", submitRating
+  @on "rated", ".rateit.autosubmit", submitRating
   @on "click", ".add_ingredient", addIngredient
   @on "click", ".delete a", deleteIngredient
 
