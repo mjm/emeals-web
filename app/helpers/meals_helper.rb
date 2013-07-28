@@ -58,4 +58,12 @@ module MealsHelper
     options = args.extract_options!
     form_for(record, *(args << options.merge(builder: MealsFormBuilder, as: :meal)), &block)
   end
+
+  def no_results_message
+    if params[:q]
+      "Your search didn't match any of your meals."
+    else
+      "You haven't uploaded any meals!"
+    end
+  end
 end

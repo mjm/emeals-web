@@ -12,7 +12,7 @@
           %button.small Search
         .column.large-1
     - if meals.empty?
-      %p You haven't uploaded any meals!
+      %p= no_results_message
     - else
       %table#meals_list
         %thead
