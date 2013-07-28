@@ -46,7 +46,7 @@ feature "Meal show" do
 
     it "lets the user update the rating", js: true do
       fill_in "Rating", with: "3", visible: false
-      page.execute_script "$('.rateit').click()"
+      page.execute_script "$('.rateit').trigger('rated')"
       expect(page).to have_content "Rating saved"
 
       visit "/meals/#{meals(:delicious).id}"
