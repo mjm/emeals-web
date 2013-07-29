@@ -1,5 +1,6 @@
 body > header {
   @include grid-row;
+  position: relative;
 }
 
 body > header {
@@ -9,4 +10,14 @@ body > header {
       font-weight: 300;
     }
   }
+}
+
+.spinner {
+  position: absolute;
+
+  width: 16px;
+  height: 16px;
+  top: 30px;
+  right: 30px;
+  background-image: image-url('ajax-loader.gif');
 }
