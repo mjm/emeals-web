@@ -38,6 +38,7 @@ deleteIngredient = (event) ->
 
 refreshPage = ->
   $(this).foundation('section', 'reflow')
+  Foundation.libs.forms.assemble()
   $('.rateit').rateit()
 
 submitRating = ->

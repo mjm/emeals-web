@@ -12,9 +12,13 @@ module RequestHelper
     "meal[#{type}_attributes][ingredients_attributes][#{index}][#{field}]"
   end
 
+  def edit_meal
+    find("a[href*=edit]").click
+  end
+
   def submit_meal_with(&block)
     visit "/"
-    click_button "Edit"
+    edit_meal
     instance_eval(&block)
 
     click_button "Save Meal Changes"

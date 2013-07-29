@@ -8,7 +8,7 @@ feature "Meal edit" do
 
   before :each do
     visit "/"
-    click_button "Edit"
+    edit_meal
   end
 
   it "shows an 'Edit this Meal' header" do

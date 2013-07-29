@@ -1,29 +1,20 @@
 #meals {
   @include grid-column(10, true, true);
   .options {
-    width: emCalc(140px);
     padding-top: 0;
     padding-bottom: 0;
+  }
+  td.options {
+    font-size: 1.4em;
+    a {
+      margin-right: emCalc(5px);
+    }
   }
   table {
     width: 100%;
   }
   #search div {
     margin-top: emCalc(17px);
-  }
-}
-
-#meals_list {
-  form {
-    margin: 0;
-    padding: 0;
-    &, div {
-      display: inline-block;
-    }
-    input[type=submit] {
-      @include button($padding:$button-sml);
-      margin-bottom: 0;
-    }
   }
 }
 

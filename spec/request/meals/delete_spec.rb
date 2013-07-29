@@ -6,7 +6,7 @@ feature "Meal delete", js: true do
   def delete_meal
     visit "/"
     expect(page.driver.confirm_messages).to be_empty
-    click_button "Delete"
+    find("a[data-method=delete]").click
     expect(page.driver.confirm_messages).to_not be_empty
   end
 

@@ -53,11 +53,11 @@ feature "Meals list" do
     end
 
     it "displays an edit button" do
-      expect(page).to have_button "Edit"
+      expect(page).to have_selector "a .foundicon-edit"
     end
 
     it "displays a delete button" do
-      expect(page).to have_button "Delete"
+      expect(page).to have_selector "a .foundicon-remove"
     end
   end
 
