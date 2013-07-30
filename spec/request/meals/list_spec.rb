@@ -57,7 +57,11 @@ feature "Meals list" do
     end
 
     it "displays a delete button" do
-      expect(page).to have_selector "a .foundicon-remove"
+      expect(page).to have_selector "a .foundicon-trash"
+    end
+
+    it "displays a hide button" do
+      expect(page).to have_selector "a .foundicon-minus"
     end
   end
 

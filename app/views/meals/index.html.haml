@@ -30,7 +30,8 @@
               %td.options
                 %ul.button-group
                   %li= link_to icon(:edit), edit_meal_url(meal)
-                  %li= link_to icon(:remove), meal_url(meal), method: :delete, data: {confirm: "Are you sure you want to delete this meal?"}
+                  %li= link_to icon(:minus), hide_meal_url(meal), method: :delete
+                  %li= link_to icon(:trash), meal_url(meal), method: :delete, data: {confirm: "Are you sure you want to delete this meal?"}
       = will_paginate meals
 
 .row

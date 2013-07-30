@@ -37,6 +37,21 @@ describe Meal do
       it "loads the meals in order" do
         expect(query.orders.first.downcase).to eq 'created_at desc'
       end
+
+      it "loads only visible meals" do
+        expect(Meal.search('').to_sql).to include '"hidden_at" IS NULL'
+      end
+    end
+  end
+
+  describe "hiding" do
+    fixtures :meals, :dishes
+
+    let(:meal) { Meal.first }
+
+    it "removes the meal from the visible scope" do
+      meal.hide
+      expect(Meal.visible).to_not include(meal)
     end
   end
 end

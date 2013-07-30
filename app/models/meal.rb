@@ -19,13 +19,18 @@ class Meal < ActiveRecord::Base
   end
 
   default_scope -> { order('created_at DESC').includes(:entree, :side) }
+  scope :visible, -> { where(hidden_at: nil) }
 
   def self.search(query, page = nil)
     result_page = page || 1
     per_page = 20
 
-    return all.paginate(page: result_page, per_page: per_page) if query.blank?
+    return visible.paginate(page: result_page, per_page: per_page) if query.blank?
     tire.search(query, load: {include: [:entree, :side]}, page: result_page, per_page: per_page)
+  end
+
+  def hide
+    update hidden_at: Time.zone.now
   end
 end
 

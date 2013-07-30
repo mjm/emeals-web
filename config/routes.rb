@@ -5,8 +5,9 @@ EmealsWeb::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'meals#index'
   resources :meals do
-    post 'upload', on: :collection
-    patch 'rate', on: :member
+    post   'upload', on: :collection
+    patch  'rate', on: :member
+    delete 'hide', on: :member
   end
 
   # Example of regular route:

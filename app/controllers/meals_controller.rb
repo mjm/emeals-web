@@ -24,6 +24,11 @@ class MealsController < ApplicationController
     redirect_to root_url
   end
 
+  def hide
+    meal.hide
+    redirect_to root_url
+  end
+
   def upload
     ImportMenuService.new.import(uploaded_menu)
     redirect_to root_url

@@ -6,7 +6,7 @@ feature "Meal delete", js: true do
   def delete_meal
     visit "/"
     expect(page.driver.confirm_messages).to be_empty
-    find("a[data-method=delete]").click
+    find("a[data-method=delete]:not([href*=hide])").click
     expect(page.driver.confirm_messages).to_not be_empty
   end
 
@@ -35,3 +35,17 @@ feature "Meal delete", js: true do
   end
 end
 
+feature "Meal hide", js: true do
+  fixtures :meals, :dishes
+
+  context "when the user clicks the hide button" do
+    before :each do
+      visit "/"
+      find("a[href*=hide]").click
+    end
+
+    it "no longer displays the meal" do
+      expect(page).to have_content "You haven't uploaded any meals"
+    end
+  end
+end
