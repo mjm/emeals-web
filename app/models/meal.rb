@@ -12,6 +12,7 @@ class Meal < ActiveRecord::Base
 
   mapping do
     indexes :id, index: :not_analyzed
+    indexes :flags, as: Proc.new { flags.map(&:humanize) }
     indexes :entree_name, as: 'entree.name'
     indexes :side_name, as: 'side.name'
     indexes :entree_instructions, as: 'entree.instructions'
