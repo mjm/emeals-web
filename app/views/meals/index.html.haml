@@ -1,11 +1,9 @@
 .row
   %section#meals
     .row
-      .column.large-5
+      .column.large-6
         %h2 Your Saved Meals
       = form_tag meals_url, method: :get, id: "search" do
-        .column.large-1
-          %label.inline(for="q") Search
         .column.large-4
           = text_field_tag :q, params[:q]
         .column.large-1

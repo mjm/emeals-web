@@ -19,7 +19,8 @@ feature "Meals list" do
   end
 
   it "has a search field" do
-    expect(page).to have_field "Search"
+    expect(page).to have_field "q"
+    expect(page).to have_button "Search"
   end
 
   context "when there are no meals to list" do
