@@ -55,6 +55,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'fuubar'
 end
 
 group :development, :test do
