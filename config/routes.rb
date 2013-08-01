@@ -10,6 +10,8 @@ EmealsWeb::Application.routes.draw do
     delete 'hide', on: :member
   end
 
+  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

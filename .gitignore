@@ -16,6 +16,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/spec/tmp
 
 # Ignore RubyMine project files.
 /.idea

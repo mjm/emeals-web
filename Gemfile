@@ -67,6 +67,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+  gem 'jasmine-rails'
 end
 
 group :production do
