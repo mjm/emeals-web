@@ -11,7 +11,7 @@ script:
 - xvfb-run bin/rake
 - bin/rake spec:javascript
 after_success:
-- ruby bin/autodeliver_stories
+- bundle exec bin/autodeliver_stories
 env:
   global:
   - secure: |-
