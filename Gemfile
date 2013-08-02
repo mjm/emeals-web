@@ -67,7 +67,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
-  gem 'jasmine-rails'
+  gem 'jasmine-rails', git: 'git://github.com/mjm/jasmine-rails.git', ref: "ed30e865017fae143ca858074fa0d32c860ffccd"
 end
 
 group :production do
